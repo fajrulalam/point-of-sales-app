@@ -27,9 +27,13 @@ public class MainActivity extends AppCompatActivity {
 //    private ArrayList<String> quantity = new ArrayList<String>();
 //    private ArrayList<String> subtotal = new ArrayList<String>();
     ListView listView;
-    String mTitle[] = {"Bakso", "Siomay", "Kentang Goreng", "Es teh"};
-    int mQuantity[] = {2, 3, 2, 5};
-    int mItemPrice[] = {7000, 7000, 5000, 3000};
+    MyAdapter adapter;
+    ArrayList<String> mTitle; //= {"Bakso", "Siomay", "Kentang Goreng", "Es teh"};
+    ArrayList<Integer> mQuantity; //int mQuantity[] = {2, 3, 2, 5};
+    ArrayList<Integer> mItemPrice; //mItemPrice[] = {7000, 7000, 5000, 3000};
+
+
+
 
 
 
@@ -40,9 +44,31 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
 
+        mTitle = new ArrayList<>();
+        mQuantity = new ArrayList<>();
+        mItemPrice = new ArrayList<>();
+
+        //Add datasets
+        mTitle.add("Bakso");
+        mTitle.add("Siomay");
+        mTitle.add("Kentang Goreng");
+        mTitle.add("Es Teh");
+
+        mQuantity.add(2);
+        mQuantity.add(3);
+        mQuantity.add(2);
+        mQuantity.add(5);
+
+        mItemPrice.add(7000);
+        mItemPrice.add(7000);
+        mItemPrice.add(5000);
+        mItemPrice.add(3000);
+
+
+
         listView = findViewById(R.id.listview);
 
-        MyAdapter adapter = new MyAdapter(this, mTitle, mQuantity, mItemPrice);
+        adapter = new MyAdapter(this, mTitle, mQuantity, mItemPrice);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -79,11 +105,11 @@ public class MainActivity extends AppCompatActivity {
 
     class MyAdapter extends ArrayAdapter<String> {
         Context context;
-        String rTitle[];
-        int rQuantity[];
-        int ritemPrice[];
+        ArrayList<String> rTitle;
+        ArrayList<Integer> rQuantity;
+        ArrayList<Integer> ritemPrice;
 
-        MyAdapter (Context c, String[] title, int[] quantity, int[] subtotal) {
+        MyAdapter (Context c, ArrayList<String> title, ArrayList<Integer> quantity, ArrayList<Integer>  subtotal) {
             super(c, R.layout.list_transaction, R.id.itemName, title);
             this.context = c;
             this.rTitle = title;
@@ -108,41 +134,42 @@ public class MainActivity extends AppCompatActivity {
             plusButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(getContext(),"Item +1 for " + rTitle[position], Toast.LENGTH_SHORT).show();
-                    int newQuant = rQuantity[position] + 1;
-                    rQuantity[position] = newQuant;
-                    Log.i("ppp: ", "" + rQuantity[position]);
-                    int subtotals = (int) ritemPrice[position] * rQuantity[position];
+                    Toast.makeText(getContext(),"Item +1 for " + rTitle.get(position), Toast.LENGTH_SHORT).show();
+                    int newQuant = rQuantity.get(position) + 1;
+                    rQuantity.set(position, newQuant);
+                    Log.i("ppp: ", "" + rQuantity.get(position));
+                    int subtotals = (int) ritemPrice.get(position) * rQuantity.get(position);
                     subtotal.setText("" + subtotals);
-                    quantity.setText("" + rQuantity[position]);
+                    quantity.setText("" + rQuantity.get(position));
                 }
             });
 
             minusButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(getContext(),"Item -1 for " + rTitle[position], Toast.LENGTH_SHORT).show();
-                    int newQuant = rQuantity[position] - 1;
-                    rQuantity[position] = newQuant;
-                    Log.i("ppp: ", "" + rQuantity[position]);
-                    int subtotals = (int) ritemPrice[position] * rQuantity[position];
+                    Toast.makeText(getContext(),"Item -1 for " + rTitle.get(position), Toast.LENGTH_SHORT).show();
+                    int newQuant = rQuantity.get(position) - 1;
+                    rQuantity.set(position, newQuant);
+                    Log.i("ppp: ", "" + rQuantity.get(position));
+                    int subtotals = (int) ritemPrice.get(position) * rQuantity.get(position);
                     subtotal.setText("" + subtotals);
-                    quantity.setText("" + rQuantity[position]);
-                    
-                    if (newQuant == 0) {
+                    quantity.setText("" + rQuantity.get(position));
 
+                    if (newQuant == 0) {
+                        rTitle.remove(position);
+                        rQuantity.remove(position);
+                        ritemPrice.remove(position);
+                        adapter.notifyDataSetChanged();
                     }
                 }
             });
 
 
-            itemName.setText(rTitle[position]);
-            quantity.setText("" + rQuantity[position]);
-            int subtotals = (int) ritemPrice[position] * rQuantity[position];
+            itemName.setText(rTitle.get(position));
+            quantity.setText("" + rQuantity.get(position));
+            int subtotals = (int) ritemPrice.get(position) * rQuantity.get(position);
             subtotal.setText("" + subtotals);
             return row;
-
-
 
         }
     }
