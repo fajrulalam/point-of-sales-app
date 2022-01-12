@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTint="#4DC4C4C4">
+
+    <TextView
+        android:id="@+id/itemName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="500dp"
+        android:layout_marginBottom="916dp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="Bakso"
+        android:textColor="#000000"
+        android:textSize="18sp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/quantity"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="50dp"
+        android:layout_toEndOf="@+id/minusButton"
+        android:background="@drawable/custom_button"
+        android:backgroundTint="#C4C4C4"
+        android:fontFamily="@font/poppins_regular"
+        android:text="3"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/minusButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="58dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="-"
+        android:textColor="#8CA370"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/plusButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/quantity"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="57dp"
+        android:layout_marginEnd="-31dp"
+        android:layout_toEndOf="@+id/quantity"
+        android:fontFamily="@font/poppins_bold"
+        android:text="+"
+        android:textColor="#B3417E77"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/subtotalTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="58dp"
+        android:layout_marginBottom="879dp"
+        android:layout_toEndOf="@+id/plusButton"
+        android:text="Rp7.000"
+        android:textColor="#80040404"
+        android:textSize="18sp" />
+
+</RelativeLayout>
