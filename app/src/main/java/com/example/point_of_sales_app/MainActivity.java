@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     ListView listView;
     String mTitle[] = {"Bakso", "Siomay", "Kentang Goreng", "Es teh"};
     int mQuantity[] = {2, 3, 2, 5};
-    String mSubtotal[] = {"14.000", "21.000", "10.000", "15.000"};
+    int mItemPrice[] = {7000, 7000, 5000, 3000};
 
 
 
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         listView = findViewById(R.id.listview);
 
-        MyAdapter adapter = new MyAdapter(this, mTitle, mQuantity, mSubtotal);
+        MyAdapter adapter = new MyAdapter(this, mTitle, mQuantity, mItemPrice);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -81,14 +81,14 @@ public class MainActivity extends AppCompatActivity {
         Context context;
         String rTitle[];
         int rQuantity[];
-        String rSubtotal[];
+        int ritemPrice[];
 
-        MyAdapter (Context c, String title[], int quantity[], String subtotal[]) {
+        MyAdapter (Context c, String[] title, int[] quantity, int[] subtotal) {
             super(c, R.layout.list_transaction, R.id.itemName, title);
             this.context = c;
             this.rTitle = title;
             this.rQuantity = quantity;
-            this.rSubtotal = subtotal;
+            this.ritemPrice= subtotal;
 
         }
 
@@ -102,11 +102,44 @@ public class MainActivity extends AppCompatActivity {
             TextView itemName = row.findViewById(R.id.itemName);
             Button quantity = row.findViewById(R.id.quantity);
             TextView subtotal = row.findViewById(R.id.subtotalTextView);
+            TextView plusButton = row.findViewById(R.id.plusButton);
+            TextView minusButton = row.findViewById(R.id.minusButton);
+
+            plusButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(getContext(),"Item +1 for " + rTitle[position], Toast.LENGTH_SHORT).show();
+                    int newQuant = rQuantity[position] + 1;
+                    rQuantity[position] = newQuant;
+                    Log.i("ppp: ", "" + rQuantity[position]);
+                    int subtotals = (int) ritemPrice[position] * rQuantity[position];
+                    subtotal.setText("" + subtotals);
+                    quantity.setText("" + rQuantity[position]);
+                }
+            });
+
+            minusButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(getContext(),"Item -1 for " + rTitle[position], Toast.LENGTH_SHORT).show();
+                    int newQuant = rQuantity[position] - 1;
+                    rQuantity[position] = newQuant;
+                    Log.i("ppp: ", "" + rQuantity[position]);
+                    int subtotals = (int) ritemPrice[position] * rQuantity[position];
+                    subtotal.setText("" + subtotals);
+                    quantity.setText("" + rQuantity[position]);
+                    
+                    if (newQuant == 0) {
+
+                    }
+                }
+            });
 
 
             itemName.setText(rTitle[position]);
             quantity.setText("" + rQuantity[position]);
-            subtotal.setText(rSubtotal[position]);
+            int subtotals = (int) ritemPrice[position] * rQuantity[position];
+            subtotal.setText("" + subtotals);
             return row;
 
 

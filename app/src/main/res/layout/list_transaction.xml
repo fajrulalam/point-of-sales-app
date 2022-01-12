@@ -22,7 +22,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="16dp"
             >
 
             <TextView
@@ -32,9 +31,9 @@
                 android:fontFamily="@font/poppins_bold"
                 android:text="-"
                 android:textColor="#8CA370"
-                android:textSize="18sp"></TextView>
+                android:textSize="24sp"></TextView>
 
-            <androidx.appcompat.widget.AppCompatButton
+            <Button
                 android:id="@+id/quantity"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -43,7 +42,8 @@
                 android:backgroundTint="#C4C4C4"
                 android:fontFamily="@font/poppins_regular"
                 android:text="3"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:textAlignment="gravity"/>
 
             <TextView
                 android:id="@+id/plusButton"
@@ -53,7 +53,7 @@
                 android:layout_marginLeft="10dp"
                 android:text="+"
                 android:textColor="#B3417E77"
-                android:textSize="18sp" />
+                android:textSize="24sp" />
 
                 <TextView
                     android:id="@+id/subtotalTextView"
