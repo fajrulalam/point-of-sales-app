@@ -4,13 +4,13 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class makanan {
-    TextView itemName;
-    Button quantity;
-    TextView minusButton;
-    TextView plusButton;
-    TextView subtotalTextView;
+    String itemName;
+    int quantity;
+    String minusButton;
+    String plusButton;
+    int subtotalTextView;
 
-    public makanan(TextView itemName, Button quantity, TextView minusButton, TextView plusButton, TextView subtotalTextView) {
+    public makanan(String itemName, int quantity, String minusButton, String plusButton, int subtotalTextView) {
         this.itemName = itemName;
         this.quantity = quantity;
         this.minusButton = minusButton;
@@ -18,43 +18,44 @@ public class makanan {
         this.subtotalTextView = subtotalTextView;
     }
 
-    public TextView getItemName() {
+    public String getItemName() {
         return itemName;
     }
 
-    public void setItemName(TextView itemName) {
+    public void setItemName(String itemName) {
         this.itemName = itemName;
     }
 
-    public Button getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Button quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
-    public TextView getMinusButton() {
+    public String getMinusButton() {
         return minusButton;
     }
 
-    public void setMinusButton(TextView minusButton) {
+    public void setMinusButton(String minusButton) {
         this.minusButton = minusButton;
     }
 
-    public TextView getPlusButton() {
+    public String getPlusButton() {
         return plusButton;
     }
 
-    public void setPlusButton(TextView plusButton) {
+    public void setPlusButton(String plusButton) {
         this.plusButton = plusButton;
     }
 
-    public TextView getSubtotalTextView() {
+    public int getSubtotalTextView() {
         return subtotalTextView;
     }
 
-    public void setSubtotalTextView(TextView subtotalTextView) {
+    public void setSubtotalTextView(int subtotalTextView) {
         this.subtotalTextView = subtotalTextView;
     }
 }
+
