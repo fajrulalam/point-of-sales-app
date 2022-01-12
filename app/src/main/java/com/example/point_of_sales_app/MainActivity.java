@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Integer> mQuantity; //int mQuantity[] = {2, 3, 2, 5};
     ArrayList<Integer> mItemPrice; //mItemPrice[] = {7000, 7000, 5000, 3000};
 
+    TextView totalCount;
+
 
 
 
@@ -47,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
         mTitle = new ArrayList<>();
         mQuantity = new ArrayList<>();
         mItemPrice = new ArrayList<>();
+
+        totalCount = findViewById(R.id.total);
+
 
         //Add datasets
         mTitle.add("Bakso");
@@ -70,6 +75,11 @@ public class MainActivity extends AppCompatActivity {
 
         adapter = new MyAdapter(this, mTitle, mQuantity, mItemPrice);
         listView.setAdapter(adapter);
+
+
+        countTotal();
+
+
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -141,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
                     int subtotals = (int) ritemPrice.get(position) * rQuantity.get(position);
                     subtotal.setText("" + subtotals);
                     quantity.setText("" + rQuantity.get(position));
+                    countTotal();
                 }
             });
 
@@ -160,6 +171,7 @@ public class MainActivity extends AppCompatActivity {
                         rQuantity.remove(position);
                         ritemPrice.remove(position);
                         adapter.notifyDataSetChanged();
+                        countTotal();
                     }
                 }
             });
@@ -172,6 +184,22 @@ public class MainActivity extends AppCompatActivity {
             return row;
 
         }
+    }
+
+    public void countTotal() {
+        int total = 0;
+        int repeater = 0;
+        int subtotal = 0;
+        while (repeater < mItemPrice.size()) {
+            subtotal = mQuantity.get(repeater) * mItemPrice.get(repeater);
+            total = total + subtotal;
+            Log.i("total is..," ,  "" +  total);
+            repeater++;
+        }
+
+        totalCount.setText("" + total);
+
+
     }
 
 

@@ -31,13 +31,15 @@
                 android:fontFamily="@font/poppins_bold"
                 android:text="-"
                 android:textColor="#8CA370"
+                android:padding="10dp"
+                android:paddingRight="20dp"
                 android:textSize="24sp"></TextView>
 
             <Button
                 android:id="@+id/quantity"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="0dp"
                 android:background="@drawable/custom_button"
                 android:backgroundTint="#C4C4C4"
                 android:fontFamily="@font/poppins_regular"
@@ -50,8 +52,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_bold"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="0dp"
+                android:paddingLeft="10dp"
                 android:text="+"
+                android:padding="10dp"
                 android:textColor="#B3417E77"
                 android:textSize="24sp" />
 
