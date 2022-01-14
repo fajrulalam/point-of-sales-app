@@ -20,5 +20,34 @@
         android:gravity="center"
         android:text="(total)"/>
 
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="85dp"
+        android:layout_height="46dp"
+        android:layout_below="@+id/totalTextView"
+        android:layout_marginTop="34dp"
+
+
+        android:layout_marginEnd="20dp"
+        android:layout_toStartOf="@+id/okButton"
+        android:backgroundTint="#80D84315"
+        android:gravity="center"
+        android:text="Cancel"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/okButton"
+        android:layout_width="85dp"
+        android:layout_height="46dp"
+        android:layout_below="@+id/totalTextView"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="20dp"
+        android:backgroundTint="#8000695C"
+        android:gravity="center"
+        android:textSize="12sp"
+        android:text="Ok" />
+
+
 
 </RelativeLayout>

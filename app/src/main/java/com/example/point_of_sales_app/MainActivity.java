@@ -304,6 +304,8 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
 
     @Override
     public void countChange(int result) {
+
         Log.i("Kembalianmu MAIN...", "Rp" + result);
+
     }
 }
