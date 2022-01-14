@@ -81,7 +81,7 @@ public class dialog extends AppCompatDialogFragment {
                         dialogBuyListener.countChange(kembalian);
                         dialog.this.dismiss();
                     } else {
-                        Toast.makeText(getContext(), "Kembalian e kurang", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Kembaliannya kurang", Toast.LENGTH_SHORT).show();
                     }
                 } catch (ClassCastException e) {
                     Toast.makeText(getContext(), "Salah input. Harus angka", Toast.LENGTH_SHORT).show();

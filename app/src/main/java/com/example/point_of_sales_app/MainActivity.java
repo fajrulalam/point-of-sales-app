@@ -304,6 +304,11 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
 
     @Override
     public void countChange(int result) {
+        Bundle bundle = new Bundle();
+        bundle.putInt("kembalian", result);
+        DialogKonfirmasi dialogKonfirmasi = new DialogKonfirmasi();
+        dialogKonfirmasi.setArguments(bundle);
+        dialogKonfirmasi.show(getSupportFragmentManager(), "test");
 
         Log.i("Kembalianmu MAIN...", "Rp" + result);
 
