@@ -6,9 +6,11 @@
     android:layout_height="wrap_content"
     android:backgroundTint="#4DC4C4C4"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="0dp">
 
         <TextView
+            android:paddingTop="5dp"
+            android:paddingLeft="5dp"
             android:id="@+id/itemName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -31,7 +33,7 @@
                 android:fontFamily="@font/poppins_bold"
                 android:text="-"
                 android:textColor="#8CA370"
-                android:padding="10dp"
+                android:paddingLeft="10dp"
                 android:paddingRight="20dp"
                 android:textSize="24sp"></TextView>
 
@@ -45,7 +47,9 @@
                 android:fontFamily="@font/poppins_regular"
                 android:text="3"
                 android:textSize="14sp"
-                android:textAlignment="gravity"/>
+                android:textAlignment="gravity"
+                android:layout_marginBottom="10dp"/>
+
 
             <TextView
                 android:id="@+id/plusButton"
@@ -53,9 +57,9 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_bold"
                 android:layout_marginLeft="0dp"
-                android:paddingLeft="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="30dp"
                 android:text="+"
-                android:padding="10dp"
                 android:textColor="#B3417E77"
                 android:textSize="24sp" />
 
@@ -63,7 +67,7 @@
                     android:id="@+id/subtotalTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginLeft="0dp"
                     android:layout_toEndOf="@+id/plusButton"
                     android:text="Rp100.000"
                     android:layout_marginTop="10dp"

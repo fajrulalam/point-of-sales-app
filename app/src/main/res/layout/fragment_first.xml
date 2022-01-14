@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <!--    Bakso-->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="50dp"
+                android:clickable="true"
+                android:foreground="@drawable/effec">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/makanan00"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:clickable="true"
+                    android:elevation="1dp"
+                    android:foreground="@drawable/effec"
+                    android:onClick="onClick"
+                    android:tag="Bakso"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+
+                        <ImageView
+                            android:id="@+id/gambarBakso"
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:layout_marginBottom="0dp"
+                            app:srcCompat="@drawable/bakso_compressed" />
+
+                        <TextView
+                            android:id="@+id/namaMakananBakso"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:text="Bakso"
+                            android:textAlignment="center"
+                            android:textSize="18dp" />
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+            </RelativeLayout>
+
+            <!--  Siomay  -->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="230dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="-20dp">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/makanan01"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:clickable="true"
+                    android:elevation="1dp"
+                    android:foreground="@drawable/effec"
+                    android:onClick="onClick"
+                    android:tag="Siomay"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+
+                        <ImageView
+                            android:id="@+id/gambarSiomay"
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:layout_marginBottom="0dp"
+                            app:srcCompat="@drawable/siomay" />
+
+
+                        <TextView
+                            android:id="@+id/namaSiomay"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:text="Siomay"
+                            android:textAlignment="center"
+                            android:textSize="18dp" />
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+            </RelativeLayout>
+
+            <!--Nasi Ayam-->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="440dp"
+                android:layout_marginTop="50dp">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/makanan02"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:clickable="true"
+                    android:elevation="1dp"
+                    android:foreground="@drawable/effec"
+                    android:onClick="onClick"
+                    android:tag="Nasi Ayam"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+
+                        <ImageView
+                            android:id="@+id/gambarAyam"
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:layout_marginBottom="0dp"
+                            app:srcCompat="@drawable/nasi_ayam" />
+                        <!--                    app:srcCompat="@drawable/bakso_compressed" -->
+
+
+                        <TextView
+                            android:id="@+id/namaMakananAyam"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:text="Nasi Ayam"
+                            android:textAlignment="center"
+                            android:textSize="18dp" />
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+            </RelativeLayout>
+
+            <!--    Tahu Goreng-->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="250dp">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/makanan10"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:clickable="true"
+                    android:elevation="1dp"
+                    android:foreground="@drawable/effec"
+                    android:onClick="onClick"
+                    android:tag="Tahu Goreng"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+
+                        <ImageView
+                            android:id="@+id/gambarTahuGoreng"
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:layout_marginBottom="0dp"
+                            app:srcCompat="@drawable/tofu" />
+
+                        <TextView
+                            android:id="@+id/namaMakananTahuGoreng"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:text="Tahu Goreng"
+                            android:textAlignment="center"
+                            android:textSize="18dp" />
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+            </RelativeLayout>
+
+            <!--    Kentang Goreng-->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="230dp"
+                android:layout_marginTop="250dp"
+                android:layout_marginEnd="-20dp">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/makanan11"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:clickable="true"
+                    android:elevation="1dp"
+                    android:foreground="@drawable/effec"
+                    android:onClick="onClick"
+                    android:tag="Kentang Goreng"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+
+                        <ImageView
+                            android:id="@+id/gambarKentangGoreng"
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:layout_marginBottom="0dp"
+                            app:srcCompat="@drawable/french_fries"/>
+                        <!--                    app:srcCompat="@drawable/bakso_compressed" -->
+
+
+                        <TextView
+                            android:id="@+id/namaKentangGoreng"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:text="Kentang G."
+                            android:textAlignment="center"
+                            android:textSize="18dp" />
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+            </RelativeLayout>
+
+            <!--    Sosis+Nugget-->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="440dp"
+                android:layout_marginTop="250dp">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/makanan12"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:clickable="true"
+                    android:elevation="1dp"
+                    android:foreground="@drawable/effec"
+                    android:onClick="onClick"
+                    android:tag="Sosis_Nugget"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+
+                        <ImageView
+                            android:id="@+id/gambarSosis_Nugget"
+                            android:layout_width="match_parent"
+                            android:layout_height="90dp"
+                            android:layout_marginBottom="10dp"
+                            app:srcCompat="@drawable/sosis_nugget"/>
+                        <!--                    app:srcCompat="@drawable/bakso_compressed" -->
+
+
+                        <TextView
+                            android:id="@+id/namaMakananSosis_Nugget"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:text="Sosis/Nugget"
+                            android:textAlignment="center"
+                            android:textSize="18dp" />
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

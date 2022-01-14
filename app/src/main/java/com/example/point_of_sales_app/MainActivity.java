@@ -3,18 +3,28 @@ package com.example.point_of_sales_app;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager2.widget.ViewPager2;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,23 +32,90 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
-//    private ArrayList<String> order = new ArrayList<String>();
+import com.example.point_of_sales_app.fragments.*;
+import com.google.android.material.tabs.TabLayout;
+
+public class MainActivity extends AppCompatActivity implements dialog.DialogBuyListener{
+    //    private ArrayList<String> order = new ArrayList<String>();
 //    private ArrayList<String> quantity = new ArrayList<String>();
 //    private ArrayList<String> subtotal = new ArrayList<String>();
     ListView listView;
     MyAdapter adapter;
-    ArrayList<String> mTitle; //= {"Bakso", "Siomay", "Kentang Goreng", "Es teh"};
+    public ArrayList<String> mTitle; //= {"Bakso", "Siomay", "Kentang Goreng", "Es teh"};
     ArrayList<Integer> mQuantity; //int mQuantity[] = {2, 3, 2, 5};
     ArrayList<Integer> mItemPrice; //mItemPrice[] = {7000, 7000, 5000, 3000};
-
+    ArrayList<Integer> msubTotal;
+    int kembalian;
     TextView totalCount;
 
+    //Buy Button
+    Button buttonBeli;
 
+    //For Swipe
+    TabLayout tabLayout;
+    ViewPager2 pager2;
+    FragmentAdapter fragmentAdapter;
 
+    //Cards on the screen
+    LinearLayout linearLayout;
+//    MakananCardFragment makananCardFragment;
 
+    public void onClick(View view) {
+            switch (view.getTag().toString()) {
+                case "Bakso":
+                    mTitle.add(view.getTag().toString());
+                    mQuantity.add(1);
+                    mItemPrice.add(7000);
+                    msubTotal.add(7000);
+                    adapter.notifyDataSetChanged();
+                    countTotal();
+                    break;
+                case "Siomay":
+                    mTitle.add(view.getTag().toString());
+                    mQuantity.add(1);
+                    mItemPrice.add(7000);
+                    msubTotal.add(7000);
+                    adapter.notifyDataSetChanged();
+                    countTotal();
+                    break;
+                case "Nasi Ayam":
+                    mTitle.add(view.getTag().toString());
+                    mQuantity.add(1);
+                    mItemPrice.add(7000);
+                    msubTotal.add(7000);
+                    adapter.notifyDataSetChanged();
+                    countTotal();
+                    break;
+                case "Tahu Goreng":
+                    mTitle.add(view.getTag().toString());
+                    mQuantity.add(1);
+                    mItemPrice.add(5000);
+                    msubTotal.add(5000);
+                    adapter.notifyDataSetChanged();
+                    countTotal();
+                    break;
+                case "Kentang Goreng":
+                    mTitle.add(view.getTag().toString());
+                    mQuantity.add(1);
+                    mItemPrice.add(5000);
+                    msubTotal.add(5000);
+                    adapter.notifyDataSetChanged();
+                    countTotal();
+                    break;
+                case "Sosis_Nugget":
+                    mTitle.add(view.getTag().toString());
+                    mQuantity.add(1);
+                    mItemPrice.add(7000);
+                    msubTotal.add(7000);
+                    adapter.notifyDataSetChanged();
+                    countTotal();
+                    break;
+                default:
+                    Toast.makeText(this, "Ndak masuk", Toast.LENGTH_SHORT).show();
 
+            }
 
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,85 +123,104 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
 
+
+
+        //Initialize Array List
         mTitle = new ArrayList<>();
         mQuantity = new ArrayList<>();
         mItemPrice = new ArrayList<>();
+        msubTotal = new ArrayList<>();
 
+        //Initialize Total Calculator
         totalCount = findViewById(R.id.total);
+        buttonBeli = findViewById(R.id.buttonBeli);
+
+        //Initialize Swipe Screen (Fragment Adapter)
+        tabLayout = findViewById(R.id.tab_layout);
+        pager2 = findViewById(R.id.view_pager2);
+
+        FragmentManager fm = getSupportFragmentManager();
+        fragmentAdapter = new FragmentAdapter(fm, getLifecycle());
+        pager2.setAdapter(fragmentAdapter);
+        tabLayout.addTab(tabLayout.newTab().setText("Makanan"));
+        tabLayout.addTab(tabLayout.newTab().setText("Minuman"));
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                pager2.setCurrentItem(tab.getPosition());
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+        pager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                tabLayout.selectTab(tabLayout.getTabAt(position));
+            }
+        });
 
 
         //Add datasets
-        mTitle.add("Bakso");
-        mTitle.add("Siomay");
-        mTitle.add("Kentang Goreng");
-        mTitle.add("Es Teh");
-
-        mQuantity.add(2);
-        mQuantity.add(3);
-        mQuantity.add(2);
-        mQuantity.add(5);
-
-        mItemPrice.add(7000);
-        mItemPrice.add(7000);
-        mItemPrice.add(5000);
-        mItemPrice.add(3000);
 
 
+        //Add the Cards
+//        makananCardFragment = new MakananCardFragment();
 
         listView = findViewById(R.id.listview);
 
-        adapter = new MyAdapter(this, mTitle, mQuantity, mItemPrice);
+        adapter = new MyAdapter(this, mTitle, mQuantity, mItemPrice, msubTotal);
         listView.setAdapter(adapter);
 
 
         countTotal();
 
-
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        //Tombol Beli
+        buttonBeli.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                if (position == 0) {
-                    Toast.makeText(MainActivity.this, "Makanan ini berkuah", Toast.LENGTH_SHORT).show();
-                }
-                if (position == 1) {
-                    Toast.makeText(MainActivity.this, "Nama Makanan ini berbumbu kacang", Toast.LENGTH_SHORT).show();
-                }
-                if (position == 2) {
-                    Toast.makeText(MainActivity.this, "Nama Makanan ini potato", Toast.LENGTH_SHORT).show();
-                }
-                if (position == 3) {
-                    Toast.makeText(MainActivity.this, "Ini minuman sih..", Toast.LENGTH_SHORT).show();
-                }
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putString("totalValue", totalCount.getText().toString());
+                dialog buyDialog = new dialog();
+                buyDialog.setArguments(bundle);
+                buyDialog.show(getSupportFragmentManager(), "test");
             }
         });
 
-//        //Create Data
-//        ArrayList<makanan> arrayList= new ArrayList<>();
-//        arrayList.add(new makanan("Tes12", 1, "-", "+", 7000));
-//        arrayList.add(new makanan("Siomay", 1, "-", "+", 7000));
-//        arrayList.add(new makanan("Kentang", 1, "-", "+", 5000));
-//        arrayList.add(new makanan("Es teh", 1, "-", "+", 3000));
-//
-//        //Make Custom Adapter
-//        makananAdapter makananAdapter = new makananAdapter(this, R.layout.list_transaction,arrayList);
-//        listView.setAdapter(makananAdapter);
+
+
 
 
     }
 
+
+
+
+    //Maknanan yang sudah terpilih Pembelian
     class MyAdapter extends ArrayAdapter<String> {
         Context context;
         ArrayList<String> rTitle;
         ArrayList<Integer> rQuantity;
         ArrayList<Integer> ritemPrice;
+        ArrayList<Integer> rsubTotal;
 
-        MyAdapter (Context c, ArrayList<String> title, ArrayList<Integer> quantity, ArrayList<Integer>  subtotal) {
+        MyAdapter(Context c, ArrayList<String> title, ArrayList<Integer> quantity, ArrayList<Integer> price, ArrayList<Integer> subTotal) {
             super(c, R.layout.list_transaction, R.id.itemName, title);
             this.context = c;
             this.rTitle = title;
             this.rQuantity = quantity;
-            this.ritemPrice= subtotal;
+            this.ritemPrice = price;
+            this.rsubTotal = subTotal;
 
         }
 
@@ -144,11 +240,12 @@ public class MainActivity extends AppCompatActivity {
             plusButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(getContext(),"Item +1 for " + rTitle.get(position), Toast.LENGTH_SHORT).show();
                     int newQuant = rQuantity.get(position) + 1;
                     rQuantity.set(position, newQuant);
                     Log.i("ppp: ", "" + rQuantity.get(position));
                     int subtotals = (int) ritemPrice.get(position) * rQuantity.get(position);
+                    rsubTotal.set(position, subtotals);
+                    Log.i("Subtotal...", "is updated to " + subtotals);
                     subtotal.setText("" + subtotals);
                     quantity.setText("" + rQuantity.get(position));
                     countTotal();
@@ -158,11 +255,12 @@ public class MainActivity extends AppCompatActivity {
             minusButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(getContext(),"Item -1 for " + rTitle.get(position), Toast.LENGTH_SHORT).show();
                     int newQuant = rQuantity.get(position) - 1;
                     rQuantity.set(position, newQuant);
                     Log.i("ppp: ", "" + rQuantity.get(position));
                     int subtotals = (int) ritemPrice.get(position) * rQuantity.get(position);
+                    rsubTotal.set(position, subtotals);
+                    Log.i("Subtotal...", "is updated to " + subtotals);
                     subtotal.setText("" + subtotals);
                     quantity.setText("" + rQuantity.get(position));
 
@@ -186,88 +284,26 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void countTotal() {
+    public int countTotal() {
         int total = 0;
         int repeater = 0;
         int subtotal = 0;
         while (repeater < mItemPrice.size()) {
             subtotal = mQuantity.get(repeater) * mItemPrice.get(repeater);
             total = total + subtotal;
-            Log.i("total is..," ,  "" +  total);
+            Log.i("total is..,", "" + total);
             repeater++;
         }
 
         totalCount.setText("" + total);
+        return total;
 
 
     }
 
 
-
-
-
-//        @NonNull
-//        @Override
-//        public View getView(int position, View convertView,  ViewGroup parent) {
-//            ViewHolder mainViewHolder = null;
-//            LayoutInflater inflater = context.getLayoutInflater();
-//            View rowView = inflater.inflate(R.layout.list_transaction, null, true);
-//            TextView itemName = (TextView) rowView.findViewById(R.id.itemName);
-//            Button quantity = (Button) rowView.findViewById(R.id.quantity);
-//            TextView minusButton = (TextView) rowView.findViewById(R.id.minusButton);
-//            TextView plusButton = (TextView) rowView.findViewById(R.id.plusButton);
-//            TextView subtotalTextView = (TextView) rowView.findViewById(R.id.subtotalTextView);
-//
-//            itemName.setText(order.get(position));
-//            quantity.setText(""+this.quantity);
-//            subtotalTextView.setText("Rp" + this.subtotal);
-
-
-
-
-
-
-//            if(convertView == null) {
-//                LayoutInflater inflater = LayoutInflater.from(getContext());
-//                convertView = inflater.inflate(layout, parent, false);
-//                ViewHolder viewHolder = new ViewHolder();
-//                viewHolder.itemName = (TextView)  convertView.findViewById(R.id.itemName);
-////                viewHolder.itemName.setText("Bakso");
-//                viewHolder.quantity = (Button) convertView.findViewById(R.id.quantity);
-//                viewHolder.minusButton = (TextView) convertView.findViewById(R.id.minusButton);
-//                viewHolder.plusButton = (TextView) convertView.findViewById(R.id.plusButton);
-//                viewHolder.subtotalTextView= (TextView) convertView.findViewById(R.id.subtotalTextView);
-//                convertView.setTag(viewHolder);
-//
-//                //Reduce Quantity
-//                viewHolder.minusButton.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        Toast.makeText(getContext(),"Item -1 for " + position, Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-
-                //Increase Quantity
-//                viewHolder.plusButton.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        Toast.makeText(getContext(),"Item +1 for " + position, Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-//
-//            }
-//                mainViewHolder = (ViewHolder) convertView.getTag();
-//                mainViewHolder.itemName.setText(getItem(position));
-
-//            return rowView;
-//        }
-//    }
-//
-//    public class ViewHolder {
-//        TextView itemName;
-//        Button quantity;
-//        TextView minusButton;
-//        TextView plusButton;
-//        TextView subtotalTextView;
-//    }
+    @Override
+    public void countChange(int result) {
+        Log.i("Kembalianmu MAIN...", "Rp" + result);
+    }
 }
