@@ -40,7 +40,7 @@ import java.sql.Timestamp;
 import com.example.point_of_sales_app.fragments.*;
 import com.google.android.material.tabs.TabLayout;
 
-public class MainActivity extends AppCompatActivity implements dialog.DialogBuyListener{
+public class MainActivity extends AppCompatActivity implements dialog.DialogBuyListener, SecondFragment.MinumanFragment{
 
     ListView listView;
     MyAdapter adapter;
@@ -58,14 +58,20 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
     TabLayout tabLayout;
     ViewPager2 pager2;
     FragmentAdapter fragmentAdapter;
+    ListView minumanListView;
+    ArrayAdapter adapterMinuman;
+    ArrayList<String> minumanList;
 
     //Cards on the screen
     LinearLayout linearLayout;
 
 
+
+
     //DataBase
     SQLiteDatabase cafeOrderDatabase;
     SharedPreferences sharedPreferencesTransactionID;
+    int transactionID_update;
 
     public void onClick(View view) {
             switch (view.getTag().toString()) {
@@ -130,8 +136,36 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
 
+        //TransactionID
+        sharedPreferencesTransactionID = getSharedPreferences("transactionID", 0);
+        SharedPreferences.Editor editor = sharedPreferencesTransactionID.edit();
+//        editor.putInt("transactionID", 1);
+//        editor.commit();
+
+        transactionID_update = sharedPreferencesTransactionID.getInt("transactionID", 0);
+
+
+
         //TEST
-        Log.i("Timenow", getTimeStamp());
+        Log.i("transactionID", ""+transactionID_update);
+
+
+        //Minuman List View
+
+
+//        minumanListView = findViewById(R.id.minumanListView);
+//
+//        minumanList = new ArrayList<>();
+//        minumanList.add("Es Teh");
+//        minumanList.add("Es Jeruk");
+//        minumanList.add("Teh Pucuk Harum");
+//        minumanList.add("Jus a");
+//        minumanList.add("Jus b");
+//        minumanList.add("Jus c");
+//        minumanList.add("Jus d");
+//        minumanList.add("Jus e");
+//        adapterMinuman = new ArrayAdapter(this, android.R.layout.simple_list_item_1, minumanList);
+//        minumanListView.setAdapter(adapterMinuman);
 
         //Initialize Array List
         mTitle = new ArrayList<>();
@@ -181,9 +215,10 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
 
         //Add Database
         cafeOrderDatabase = this.openOrCreateDatabase("cafeOrderDatabase", MODE_PRIVATE, null);
-        cafeOrderDatabase.execSQL("DROP TABLE IF EXISTS transaction_detail");
+//        cafeOrderDatabase.execSQL("DROP TABLE IF EXISTS transaction_detail");
         cafeOrderDatabase.execSQL("CREATE TABLE IF NOT EXISTS transaction_detail ( " +
-//                "transactionDetailID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "transactionDetailID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "transactionID INTEGER," +
                 "itemID VARCHAR(255)," +
                 "quantity INTEGER," +
                 "lineTotal INTEGER," +
@@ -213,6 +248,16 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
             }
         });
 
+    }
+
+
+    //Update Transaction ID
+    public int UpdateTransactionID() {
+        SharedPreferences.Editor editor = sharedPreferencesTransactionID.edit();
+        editor.putInt("transactionID", 1+transactionID_update);
+        editor.commit();
+        transactionID_update = sharedPreferencesTransactionID.getInt("transactionID", 0);
+        return transactionID_update;
     }
 
     //Maknanan yang sudah terpilih Pembelian
@@ -321,12 +366,14 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
         dialogKonfirmasi.setArguments(bundle);
         dialogKonfirmasi.show(getSupportFragmentManager(), "test");
         int i = 0;
+        UpdateTransactionID();
 //        cafeOrderDatabase.execSQL("INSERT INTO transaction_detail (itemID, quantity, Linetotal, TimeStamp) VALUES ('Nasi Padang', 3, 'feaf', '"+getTimeStamp()+"')");
         while (i < mTitle.size()) {
-            cafeOrderDatabase.execSQL("INSERT INTO transaction_detail (itemID, quantity, Linetotal, TimeStamp) VALUES" +
-                    " ('" + mTitle.get(i) +"','"+ mQuantity.get(i) +"', '"+ msubTotal.get(i)+"','"+getTimeStamp()+"' )");
+            cafeOrderDatabase.execSQL("INSERT INTO transaction_detail (transactionID, itemID, quantity, Linetotal, TimeStamp) VALUES" +
+                    " ('"+transactionID_update + "','" + mTitle.get(i) +"','"+ mQuantity.get(i) +"', '"+ msubTotal.get(i)+"','"+getTimeStamp()+"' )");
             i++;
         }
+        Log.i("transactionID", ""+transactionID_update);
 
         ClearOrderList();
 
@@ -349,6 +396,32 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
             adapter.notifyDataSetChanged();
 //            i++;
 
+        }
+    }
+
+    @Override
+    public void kirimDataMinuman(String minuman) {
+        Log.i("Minuman ini MAIN...", minuman);
+        if (minuman.startsWith("Jus")) {
+            mTitle.add(minuman);
+            mQuantity.add(1);
+            mItemPrice.add(5000);
+            msubTotal.add(5000);
+            adapter.notifyDataSetChanged();
+            countTotal();
+        } else {
+            switch (minuman) {
+                case "Es Jeruk":
+                case "Es Teh":
+                    mTitle.add(minuman);
+                    mQuantity.add(1);
+                    mItemPrice.add(3000);
+                    msubTotal.add(3000);
+                    adapter.notifyDataSetChanged();
+                    countTotal();
+                    Log.i("Es teh ni bos", "senggol dong");
+                    break;
+            }
         }
     }
 }

@@ -1,19 +1,31 @@
 package com.example.point_of_sales_app;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link SecondFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SecondFragment extends Fragment {
+public class SecondFragment extends Fragment implements View.OnClickListener {
+    private ListView minumanListView;
+    private ArrayList<String> minumanList;
+    private MinumanFragment minumanFragment;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,6 +71,59 @@ public class SecondFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_second, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_second, container, false);
+        minumanListView = (ListView) rootView.findViewById(R.id.minumanListView);
+        minumanList = new ArrayList<>();
+        minumanList = new ArrayList<>();
+        minumanList.add("Test");
+        minumanList.add("Es Teh");
+        minumanList.add("Es Jeruk");
+        minumanList.add("Teh Pucuk Harum");
+        minumanList.add("Jus a");
+        minumanList.add("Jus b");
+        minumanList.add("Jus c");
+        minumanList.add("Jus d");
+        minumanList.add("Jus e");
+        minumanList.add("Jus e");
+        minumanList.add("Jus e");
+        minumanList.add("Jus e");
+        minumanList.add("Jus e");
+        minumanList.add("Jus e");
+        populateList();
+
+        minumanListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String itemClicked = minumanList.get(i);
+
+                minumanFragment.kirimDataMinuman(itemClicked);
+
+            }
+        });
+
+
+        return rootView;
+    }
+
+    @Override
+    public void onClick(View view) {
+
+    }
+
+    private void populateList() {
+        ArrayAdapter minumanArrayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, minumanList);
+        minumanListView.setAdapter(minumanArrayAdapter);
+
+
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        minumanFragment = (MinumanFragment) context;
+    }
+
+    public interface MinumanFragment {
+        void kirimDataMinuman(String minuman);
     }
 }
