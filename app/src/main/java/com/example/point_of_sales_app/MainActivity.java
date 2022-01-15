@@ -11,6 +11,8 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Layout;
@@ -29,16 +31,17 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Date;
+import java.sql.Timestamp;
 
 import com.example.point_of_sales_app.fragments.*;
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity implements dialog.DialogBuyListener{
-    //    private ArrayList<String> order = new ArrayList<String>();
-//    private ArrayList<String> quantity = new ArrayList<String>();
-//    private ArrayList<String> subtotal = new ArrayList<String>();
+
     ListView listView;
     MyAdapter adapter;
     public ArrayList<String> mTitle; //= {"Bakso", "Siomay", "Kentang Goreng", "Es teh"};
@@ -58,7 +61,11 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
 
     //Cards on the screen
     LinearLayout linearLayout;
-//    MakananCardFragment makananCardFragment;
+
+
+    //DataBase
+    SQLiteDatabase cafeOrderDatabase;
+    SharedPreferences sharedPreferencesTransactionID;
 
     public void onClick(View view) {
             switch (view.getTag().toString()) {
@@ -123,7 +130,8 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
 
-
+        //TEST
+        Log.i("Timenow", getTimeStamp());
 
         //Initialize Array List
         mTitle = new ArrayList<>();
@@ -171,7 +179,15 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
         });
 
 
-        //Add datasets
+        //Add Database
+        cafeOrderDatabase = this.openOrCreateDatabase("cafeOrderDatabase", MODE_PRIVATE, null);
+        cafeOrderDatabase.execSQL("DROP TABLE IF EXISTS transaction_detail");
+        cafeOrderDatabase.execSQL("CREATE TABLE IF NOT EXISTS transaction_detail ( " +
+//                "transactionDetailID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "itemID VARCHAR(255)," +
+                "quantity INTEGER," +
+                "lineTotal INTEGER," +
+                "timeStamp VARCHAR(24))");
 
 
         //Add the Cards
@@ -197,14 +213,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
             }
         });
 
-
-
-
-
     }
-
-
-
 
     //Maknanan yang sudah terpilih Pembelian
     class MyAdapter extends ArrayAdapter<String> {
@@ -223,6 +232,8 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
             this.rsubTotal = subTotal;
 
         }
+
+
 
         @NonNull
         @Override
@@ -309,8 +320,35 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
         DialogKonfirmasi dialogKonfirmasi = new DialogKonfirmasi();
         dialogKonfirmasi.setArguments(bundle);
         dialogKonfirmasi.show(getSupportFragmentManager(), "test");
+        int i = 0;
+//        cafeOrderDatabase.execSQL("INSERT INTO transaction_detail (itemID, quantity, Linetotal, TimeStamp) VALUES ('Nasi Padang', 3, 'feaf', '"+getTimeStamp()+"')");
+        while (i < mTitle.size()) {
+            cafeOrderDatabase.execSQL("INSERT INTO transaction_detail (itemID, quantity, Linetotal, TimeStamp) VALUES" +
+                    " ('" + mTitle.get(i) +"','"+ mQuantity.get(i) +"', '"+ msubTotal.get(i)+"','"+getTimeStamp()+"' )");
+            i++;
+        }
 
-        Log.i("Kembalianmu MAIN...", "Rp" + result);
+        ClearOrderList();
 
+    }
+
+    public String getTimeStamp() {
+        Long datetime = System.currentTimeMillis();
+        Timestamp timestamp = new Timestamp(datetime);
+        return "" + timestamp;
+    }
+
+    public void ClearOrderList(){
+        int i = 0;
+        while (i < mTitle.size()) {
+            mTitle.remove(i);
+            mQuantity.remove(i);
+            msubTotal.remove(i);
+            mItemPrice.remove(i);
+            totalCount.setText("0");
+            adapter.notifyDataSetChanged();
+//            i++;
+
+        }
     }
 }

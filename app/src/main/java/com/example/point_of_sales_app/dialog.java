@@ -86,7 +86,7 @@ public class dialog extends AppCompatDialogFragment {
                 } catch (ClassCastException e) {
                     Toast.makeText(getContext(), "Salah input. Harus angka", Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
-                    Toast.makeText(getContext(), "Salah input. Harus angka", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Salah di hal lain si", Toast.LENGTH_SHORT).show();
                 }
             }
         });
