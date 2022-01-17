@@ -33,12 +33,15 @@ import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Date;
 import java.sql.Timestamp;
 
 import com.example.point_of_sales_app.fragments.*;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity implements dialog.DialogBuyListener, SecondFragment.MinumanFragment{
 
@@ -65,13 +68,20 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
     //Cards on the screen
     LinearLayout linearLayout;
 
-
+    //Variabel yang masuk ke DB
+    String namaMakananPesanan;
+    int jumlahMakananPesanan;
+    int hargaMakananPesanan;
+    int subTotalMakananPesanann;
 
 
     //DataBase
     SQLiteDatabase cafeOrderDatabase;
     SharedPreferences sharedPreferencesTransactionID;
     int transactionID_update;
+    DAOTransaction dao;
+    transactionDetail transactionDetail;
+    DatabaseReference reff;
 
     public void onClick(View view) {
             switch (view.getTag().toString()) {
@@ -148,6 +158,23 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
 
         //TEST
         Log.i("transactionID", ""+transactionID_update);
+        transactionDetail = new transactionDetail();
+        reff = FirebaseDatabase.getInstance("https://point-of-sales-app-25e2b-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference().child("TransacationDetail");
+
+        try {
+//            FirebaseDatabase database = FirebaseDatabase.getInstance("https://point-of-sales-app-25e2b-default-rtdb.asia-southeast1.firebasedatabase.app/");
+//            DatabaseReference myRef = database.getReference().child("TransactionDetail");
+//            HashMap<String, String> hashMap = new HashMap<>();
+//            hashMap.put("test", "yoga");
+//            myRef.child("test fajrul").setValue(hashMap);
+//            Log.i("ppp", "Harusnya bisa connect!");
+
+
+        } catch (Exception e) {
+            Log.i("ppp", "fail");
+        }
+
+
 
 
         //Minuman List View
@@ -366,9 +393,29 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
         dialogKonfirmasi.setArguments(bundle);
         dialogKonfirmasi.show(getSupportFragmentManager(), "test");
         int i = 0;
+        int j = 0;
         UpdateTransactionID();
+        //Firebase Database
+        while (j <mTitle.size()) {
+            namaMakananPesanan = mTitle.get(j);
+            jumlahMakananPesanan = mQuantity.get(j);
+            subTotalMakananPesanann = msubTotal.get(j);
+
+            transactionDetail.setTransactionID(transactionID_update);
+            transactionDetail.setTransactionDetailID(transactionID_update);
+            transactionDetail.setItemID(namaMakananPesanan);
+            transactionDetail.setQuantity(jumlahMakananPesanan);
+            transactionDetail.setLineTotal(subTotalMakananPesanann);
+            transactionDetail.setTimeStamp(getTimeStamp());
+            reff.push().setValue(transactionDetail);
+            j++;
+        }
+
 //        cafeOrderDatabase.execSQL("INSERT INTO transaction_detail (itemID, quantity, Linetotal, TimeStamp) VALUES ('Nasi Padang', 3, 'feaf', '"+getTimeStamp()+"')");
         while (i < mTitle.size()) {
+
+//            transactionDetail = new transactionDetail(1, transactionID_update,  msubTotal.get(i), mQuantity.get(i), mTitle.get(i), getTimeStamp());
+//            dao.add(transactionDetail);
             cafeOrderDatabase.execSQL("INSERT INTO transaction_detail (transactionID, itemID, quantity, Linetotal, TimeStamp) VALUES" +
                     " ('"+transactionID_update + "','" + mTitle.get(i) +"','"+ mQuantity.get(i) +"', '"+ msubTotal.get(i)+"','"+getTimeStamp()+"' )");
             i++;

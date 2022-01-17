@@ -1,0 +1,65 @@
+package com.example.point_of_sales_app;
+
+public class transactionDetail {
+
+    private int transactionDetailID, transactionID, quantity, lineTotal;
+    private  String itemID, timeStamp;
+    public transactionDetail(){}
+
+    public transactionDetail(int transactionDetailID, int transactionID, int quantity, int lineTotal, String itemID, String timeStamp) {
+        this.transactionDetailID = transactionDetailID;
+        this.transactionID = transactionID;
+        this.quantity = quantity;
+        this.lineTotal = lineTotal;
+        this.itemID = itemID;
+        this.timeStamp = timeStamp;
+    }
+
+    public int getTransactionDetailID() {
+        return transactionDetailID;
+    }
+
+    public void setTransactionDetailID(int transactionDetailID) {
+        this.transactionDetailID = transactionDetailID;
+    }
+
+    public int getTransactionID() {
+        return transactionID;
+    }
+
+    public void setTransactionID(int transactionID) {
+        this.transactionID = transactionID;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public int getLineTotal() {
+        return lineTotal;
+    }
+
+    public void setLineTotal(int lineTotal) {
+        this.lineTotal = lineTotal;
+    }
+
+    public String getItemID() {
+        return itemID;
+    }
+
+    public void setItemID(String itemID) {
+        this.itemID = itemID;
+    }
+
+    public String getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(String timeStamp) {
+        this.timeStamp = timeStamp;
+    }
+}
