@@ -25,6 +25,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -54,8 +55,11 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
     int kembalian;
     TextView totalCount;
 
-    //Buy Button
+    //Buttons
     Button buttonBeli;
+    ImageButton restartButton;
+    ImageButton mainMenuButton;
+    ImageButton backEndButton;
 
     //For Swipe
     TabLayout tabLayout;
@@ -79,6 +83,8 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
     SQLiteDatabase cafeOrderDatabase;
     SharedPreferences sharedPreferencesTransactionID;
     int transactionID_update;
+    SharedPreferences sharedPreferencesCustomerID;
+    int customerNumber_update;
     DAOTransaction dao;
     transactionDetail transactionDetail;
     DatabaseReference reff;
@@ -149,50 +155,47 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
         //TransactionID
         sharedPreferencesTransactionID = getSharedPreferences("transactionID", 0);
         SharedPreferences.Editor editor = sharedPreferencesTransactionID.edit();
+
+        sharedPreferencesCustomerID = getSharedPreferences("customerID", 0);
+        SharedPreferences.Editor editor1 = sharedPreferencesCustomerID.edit();
+//        editor1.putInt("customerID", 0);
+//        editor1.commit();
+
+
 //        editor.putInt("transactionID", 1);
 //        editor.commit();
 
         transactionID_update = sharedPreferencesTransactionID.getInt("transactionID", 0);
+        customerNumber_update = sharedPreferencesCustomerID.getInt("CustomerID", 0);
+
+        Log.i("CustomerID", ""+  customerNumber_update);
 
 
 
-        //TEST
-        Log.i("transactionID", ""+transactionID_update);
+
+
+        //Databse Connection and Setter and Getter for Input
         transactionDetail = new transactionDetail();
         reff = FirebaseDatabase.getInstance("https://point-of-sales-app-25e2b-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference().child("TransacationDetail");
 
-        try {
-//            FirebaseDatabase database = FirebaseDatabase.getInstance("https://point-of-sales-app-25e2b-default-rtdb.asia-southeast1.firebasedatabase.app/");
-//            DatabaseReference myRef = database.getReference().child("TransactionDetail");
-//            HashMap<String, String> hashMap = new HashMap<>();
-//            hashMap.put("test", "yoga");
-//            myRef.child("test fajrul").setValue(hashMap);
-//            Log.i("ppp", "Harusnya bisa connect!");
+
+        //ButtonLayout Sidebar
+        restartButton = (ImageButton) findViewById(R.id.restartButton);
+        backEndButton = findViewById(R.id.backEndButton);
+        mainMenuButton = findViewById(R.id.mainMenuButton);
+
+        restartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences.Editor editor1 = sharedPreferencesCustomerID.edit();
+                editor1.putInt("customerID", 0);
+                editor1.commit();
+                customerNumber_update = sharedPreferencesCustomerID.getInt("customerID", 0);
+                Toast.makeText(getApplicationContext(), "Nomor Pelanggan sudah diulang dari 1", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
-        } catch (Exception e) {
-            Log.i("ppp", "fail");
-        }
-
-
-
-
-        //Minuman List View
-
-
-//        minumanListView = findViewById(R.id.minumanListView);
-//
-//        minumanList = new ArrayList<>();
-//        minumanList.add("Es Teh");
-//        minumanList.add("Es Jeruk");
-//        minumanList.add("Teh Pucuk Harum");
-//        minumanList.add("Jus a");
-//        minumanList.add("Jus b");
-//        minumanList.add("Jus c");
-//        minumanList.add("Jus d");
-//        minumanList.add("Jus e");
-//        adapterMinuman = new ArrayAdapter(this, android.R.layout.simple_list_item_1, minumanList);
-//        minumanListView.setAdapter(adapterMinuman);
 
         //Initialize Array List
         mTitle = new ArrayList<>();
@@ -285,6 +288,15 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
         editor.commit();
         transactionID_update = sharedPreferencesTransactionID.getInt("transactionID", 0);
         return transactionID_update;
+    }
+
+    //Update Customer ID
+    public int UpdateTCustomerID() {
+        SharedPreferences.Editor editor1 = sharedPreferencesCustomerID.edit();
+        editor1.putInt("CustomerID", 1+customerNumber_update);
+        editor1.commit();
+        customerNumber_update= sharedPreferencesCustomerID.getInt("CustomerID", 0);
+        return customerNumber_update;
     }
 
     //Maknanan yang sudah terpilih Pembelian
@@ -395,12 +407,13 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
         int i = 0;
         int j = 0;
         UpdateTransactionID();
+        UpdateTCustomerID();
         //Firebase Database
         while (j <mTitle.size()) {
             namaMakananPesanan = mTitle.get(j);
             jumlahMakananPesanan = mQuantity.get(j);
             subTotalMakananPesanann = msubTotal.get(j);
-
+            transactionDetail.setNoCustomer(customerNumber_update);
             transactionDetail.setTransactionID(transactionID_update);
             transactionDetail.setTransactionDetailID(transactionID_update);
             transactionDetail.setItemID(namaMakananPesanan);
@@ -421,6 +434,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
             i++;
         }
         Log.i("transactionID", ""+transactionID_update);
+        Log.i("Customer ID update", "" + customerNumber_update);
 
         ClearOrderList();
 

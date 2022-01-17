@@ -2,17 +2,26 @@ package com.example.point_of_sales_app;
 
 public class transactionDetail {
 
-    private int transactionDetailID, transactionID, quantity, lineTotal;
+    private int transactionDetailID, transactionID, quantity, lineTotal, noCustomer;
     private  String itemID, timeStamp;
     public transactionDetail(){}
 
-    public transactionDetail(int transactionDetailID, int transactionID, int quantity, int lineTotal, String itemID, String timeStamp) {
+    public transactionDetail(int transactionDetailID, int transactionID, int quantity, int lineTotal, String itemID, String timeStamp, int noCustomer) {
         this.transactionDetailID = transactionDetailID;
         this.transactionID = transactionID;
         this.quantity = quantity;
         this.lineTotal = lineTotal;
         this.itemID = itemID;
         this.timeStamp = timeStamp;
+        this.noCustomer = noCustomer;
+    }
+
+    public int getNoCustomer() {
+        return noCustomer;
+    }
+
+    public void setNoCustomer(int noCustomer) {
+        this.noCustomer = noCustomer;
     }
 
     public int getTransactionDetailID() {
