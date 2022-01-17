@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
     Button buttonBeli;
     ImageButton restartButton;
     ImageButton mainMenuButton;
-    ImageButton backEndButton;
+    private ImageButton backEndButton;
 
     //For Swipe
     TabLayout tabLayout;
@@ -183,6 +183,13 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
         restartButton = (ImageButton) findViewById(R.id.restartButton);
         backEndButton = findViewById(R.id.backEndButton);
         mainMenuButton = findViewById(R.id.mainMenuButton);
+
+        backEndButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openBackEnd();
+            }
+        });
 
         restartButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -480,9 +487,15 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                     msubTotal.add(3000);
                     adapter.notifyDataSetChanged();
                     countTotal();
-                    Log.i("Es teh ni bos", "senggol dong");
+
                     break;
             }
         }
+    }
+
+    public void openBackEnd() {
+        Intent intent = new Intent(this, BackEnd.class);
+        startActivity(intent);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 }

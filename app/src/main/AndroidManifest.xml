@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Point_of_sales_app">
         <activity
+            android:name=".BackEnd"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
