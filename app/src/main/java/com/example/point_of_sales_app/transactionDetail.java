@@ -3,10 +3,10 @@ package com.example.point_of_sales_app;
 public class transactionDetail {
 
     private int transactionDetailID, transactionID, quantity, lineTotal, noCustomer;
-    private  String itemID, timeStamp;
+    private  String itemID, timeStamp, status;
     public transactionDetail(){}
 
-    public transactionDetail(int transactionDetailID, int transactionID, int quantity, int lineTotal, String itemID, String timeStamp, int noCustomer) {
+    public transactionDetail(int transactionDetailID, int transactionID, int quantity, int lineTotal, String itemID, String timeStamp, int noCustomer, String status) {
         this.transactionDetailID = transactionDetailID;
         this.transactionID = transactionID;
         this.quantity = quantity;
@@ -14,6 +14,16 @@ public class transactionDetail {
         this.itemID = itemID;
         this.timeStamp = timeStamp;
         this.noCustomer = noCustomer;
+        this.status = status;
+
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public int getNoCustomer() {

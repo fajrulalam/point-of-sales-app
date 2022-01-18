@@ -427,6 +427,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
             transactionDetail.setQuantity(jumlahMakananPesanan);
             transactionDetail.setLineTotal(subTotalMakananPesanann);
             transactionDetail.setTimeStamp(getTimeStamp());
+            transactionDetail.setStatus("Serving");
             reff.push().setValue(transactionDetail);
             j++;
         }
