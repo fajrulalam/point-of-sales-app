@@ -104,7 +104,7 @@ public class BackEnd extends AppCompatActivity {
                     Object subtotal = map.get("lineTotal");
                     int pValue = Integer.parseInt(String.valueOf(subtotal));
                     sum += pValue;
-                    totalHariIniTextView.setText(String.valueOf(sum));
+                    totalHariIniTextView.setText("Rp." + sum);
                 }
             } else {
 
