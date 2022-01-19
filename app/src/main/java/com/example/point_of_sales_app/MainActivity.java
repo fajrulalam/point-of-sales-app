@@ -472,6 +472,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
         transactionDetailStatus.setCustomerNumber(customerNumber_update);
         transactionDetailStatus.setItemID(namaSubMakanan);
         transactionDetailStatus.setQuantity(jumlahSub);
+        transactionDetailStatus.setStatus("Serving");
         reffStatus.push().setValue(transactionDetailStatus);
 
 
