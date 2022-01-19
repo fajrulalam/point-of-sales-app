@@ -27,7 +27,6 @@ public class BackEnd extends AppCompatActivity {
     private DatabaseReference reff;
     private Query reffToday;
     private TextView totalHariIniTextView;
-    Collection transactionDetailCollection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

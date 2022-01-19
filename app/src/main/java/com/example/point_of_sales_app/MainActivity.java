@@ -87,7 +87,13 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
     int customerNumber_update;
     DAOTransaction dao;
     transactionDetail transactionDetail;
+    transactionDetailStatus transactionDetailStatus;
+    HashMap itemHashMap;
+    HashMap quantityHashMap;
     DatabaseReference reff;
+    DatabaseReference reffStatus;
+    DatabaseReference reffItem;
+    DatabaseReference reffQuantity;
 
     public void onClick(View view) {
             switch (view.getTag().toString()) {
@@ -176,7 +182,11 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
 
         //Databse Connection and Setter and Getter for Input
         transactionDetail = new transactionDetail();
+        transactionDetailStatus = new transactionDetailStatus();
         reff = FirebaseDatabase.getInstance("https://point-of-sales-app-25e2b-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference().child("TransacationDetail");
+        reffStatus = FirebaseDatabase.getInstance("https://point-of-sales-app-25e2b-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference().child("TransacationStatus");
+        reffItem = FirebaseDatabase.getInstance("https://point-of-sales-app-25e2b-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference().child("TransacationStatus").child("Makanan");
+        reffQuantity = FirebaseDatabase.getInstance("https://point-of-sales-app-25e2b-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference().child("TransacationStatus").child("Quantity");
 
 
         //ButtonLayout Sidebar
@@ -324,8 +334,6 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
 
         }
 
-
-
         @NonNull
         @Override
         public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -413,10 +421,16 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
         dialogKonfirmasi.show(getSupportFragmentManager(), "test");
         int i = 0;
         int j = 0;
+        int k = 0;
+        String namaSubMakanan_container = "";
+        String namaSubMakanan = "";
+        String jumlahSub_container = "";
+        String jumlahSub = "";
         UpdateTransactionID();
         UpdateTCustomerID();
         //Firebase Database
         while (j <mTitle.size()) {
+            //Transaction Detail
             namaMakananPesanan = mTitle.get(j);
             jumlahMakananPesanan = mQuantity.get(j);
             subTotalMakananPesanann = msubTotal.get(j);
@@ -429,8 +443,37 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
             transactionDetail.setTimeStamp(getTimeStamp());
             transactionDetail.setStatus("Serving");
             reff.push().setValue(transactionDetail);
+
+            //Transaction Status
+//            transactionDetailStatus.setCustomerNumber(customerNumber_update);
+//            while (k < mTitle.size()) {
+//
+//                transactionDetailStatus.setItemID();
+//
+//                k++;
+//            }
             j++;
         }
+        while (k<mTitle.size()){
+            namaSubMakanan_container = mTitle.get(k);
+            jumlahSub_container = String.valueOf(mQuantity.get(k));
+            if(k==mTitle.size()-1){
+                namaSubMakanan += namaSubMakanan_container;
+                jumlahSub += jumlahSub_container;
+            } else {
+                namaSubMakanan += namaSubMakanan_container+", ";
+                jumlahSub += jumlahSub_container+", ";
+            }
+
+//            itemHashMap.put(""+ k, mTitle.get(k));
+//            quantityHashMap.put(""+ k, mQuantity.get(k));
+            k++;
+        }
+        transactionDetailStatus.setCustomerNumber(customerNumber_update);
+        transactionDetailStatus.setItemID(namaSubMakanan);
+        transactionDetailStatus.setQuantity(jumlahSub);
+        reffStatus.push().setValue(transactionDetailStatus);
+
 
 //        cafeOrderDatabase.execSQL("INSERT INTO transaction_detail (itemID, quantity, Linetotal, TimeStamp) VALUES ('Nasi Padang', 3, 'feaf', '"+getTimeStamp()+"')");
         while (i < mTitle.size()) {
