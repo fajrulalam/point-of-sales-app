@@ -184,7 +184,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
         transactionDetail = new transactionDetail();
         transactionDetailStatus = new transactionDetailStatus();
         reff = FirebaseDatabase.getInstance("https://point-of-sales-app-25e2b-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference().child("TransacationDetail");
-        reffStatus = FirebaseDatabase.getInstance("https://point-of-sales-app-25e2b-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference().child("TransacationStatus");
+        reffStatus = FirebaseDatabase.getInstance("https://point-of-sales-app-25e2b-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("TransacationStatus");
         reffItem = FirebaseDatabase.getInstance("https://point-of-sales-app-25e2b-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference().child("TransacationStatus").child("Makanan");
         reffQuantity = FirebaseDatabase.getInstance("https://point-of-sales-app-25e2b-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference().child("TransacationStatus").child("Quantity");
 
@@ -469,11 +469,16 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
 //            quantityHashMap.put(""+ k, mQuantity.get(k));
             k++;
         }
-        transactionDetailStatus.setCustomerNumber(customerNumber_update);
-        transactionDetailStatus.setItemID(namaSubMakanan);
-        transactionDetailStatus.setQuantity(jumlahSub);
-        transactionDetailStatus.setStatus("Serving");
-        reffStatus.push().setValue(transactionDetailStatus);
+        Log.i("Ulang dari 1", ""+customerNumber_update);
+        reffStatus.child(""+customerNumber_update).child("status").setValue("Serving");
+        reffStatus.child(""+customerNumber_update).child("customerNumber").setValue(customerNumber_update);
+        reffStatus.child(""+customerNumber_update).child("quantity").setValue(jumlahSub);
+        reffStatus.child(""+customerNumber_update).child("itemID").setValue(namaSubMakanan);
+//        transactionDetailStatus.setCustomerNumber(customerNumber_update);
+//        transactionDetailStatus.setItemID(namaSubMakanan);
+//        transactionDetailStatus.setQuantity(jumlahSub);
+//        transactionDetailStatus.setStatus("Serving");
+//        reffStatus.push().setValue(transactionDetailStatus);
 
 
 //        cafeOrderDatabase.execSQL("INSERT INTO transaction_detail (itemID, quantity, Linetotal, TimeStamp) VALUES ('Nasi Padang', 3, 'feaf', '"+getTimeStamp()+"')");
