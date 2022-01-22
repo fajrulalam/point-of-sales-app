@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                     adapter.notifyDataSetChanged();
                     countTotal();
                     break;
-                case "Nasi Ayam":
+                case "Nasi Lauk":
                     mTitle.add(view.getTag().toString());
                     mQuantity.add(1);
                     mItemPrice.add(7000);
@@ -132,7 +132,15 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                     adapter.notifyDataSetChanged();
                     countTotal();
                     break;
-                case "Tahu Goreng":
+                case "Nasi Bungkus A":
+                    mTitle.add(view.getTag().toString());
+                    mQuantity.add(1);
+                    mItemPrice.add(3000);
+                    msubTotal.add(3000);
+                    adapter.notifyDataSetChanged();
+                    countTotal();
+                    break;
+                case "Nasi Bungkus B":
                     mTitle.add(view.getTag().toString());
                     mQuantity.add(1);
                     mItemPrice.add(5000);
@@ -140,6 +148,14 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                     adapter.notifyDataSetChanged();
                     countTotal();
                     break;
+//                case "Tahu Goreng":
+//                    mTitle.add(view.getTag().toString());
+//                    mQuantity.add(1);
+//                    mItemPrice.add(5000);
+//                    msubTotal.add(5000);
+//                    adapter.notifyDataSetChanged();
+//                    countTotal();
+//                    break;
                 case "Kentang Goreng":
                     mTitle.add(view.getTag().toString());
                     mQuantity.add(1);
@@ -148,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                     adapter.notifyDataSetChanged();
                     countTotal();
                     break;
-                case "Sosis_Nugget":
+                case "Popmie":
                     mTitle.add(view.getTag().toString());
                     mQuantity.add(1);
                     mItemPrice.add(7000);
