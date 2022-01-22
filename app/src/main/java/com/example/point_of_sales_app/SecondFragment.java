@@ -75,20 +75,16 @@ public class SecondFragment extends Fragment implements View.OnClickListener {
         minumanListView = (ListView) rootView.findViewById(R.id.minumanListView);
         minumanList = new ArrayList<>();
         minumanList = new ArrayList<>();
-        minumanList.add("Test");
+        minumanList.add("Aqua 600ml");
+        minumanList.add("Coca-Cola");
+        minumanList.add("Es Kopi Durian");
         minumanList.add("Es Teh");
-        minumanList.add("Es Jeruk");
+        minumanList.add("Fanta");
+        minumanList.add("Frestea");
+        minumanList.add("Kopi Hitam");
+        minumanList.add("Milo");
+        minumanList.add("Sprite");
         minumanList.add("Teh Pucuk Harum");
-        minumanList.add("Jus a");
-        minumanList.add("Jus b");
-        minumanList.add("Jus c");
-        minumanList.add("Jus d");
-        minumanList.add("Jus e");
-        minumanList.add("Jus e");
-        minumanList.add("Jus e");
-        minumanList.add("Jus e");
-        minumanList.add("Jus e");
-        minumanList.add("Jus e");
         populateList();
 
         minumanListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -37,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="120dp"
-                android:backgroundTint="#99417E77"
+                android:backgroundTint="#E6417E77"
                 android:contentDescription="inventory"
                 android:paddingTop="20dp"
                 android:paddingBottom="20dp"
@@ -73,7 +73,7 @@
             android:layout_centerInParent="true"
             android:layout_marginTop="-20dp"
             android:fontFamily="@font/montserrat_bold"
-            android:text="Total"
+            android:text="Rp0"
             android:textColor="#2E7D32"
             android:textSize="30dp" />
 

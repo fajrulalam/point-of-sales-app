@@ -549,7 +549,6 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
 
     @Override
     public void kirimDataMinuman(String minuman) {
-        Log.i("Minuman ini MAIN...", minuman);
         if (minuman.startsWith("Jus")) {
             mTitle.add(minuman);
             mQuantity.add(1);
@@ -559,15 +558,36 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
             countTotal();
         } else {
             switch (minuman) {
-                case "Es Jeruk":
+                case "Teh Pucuk Harum":
                 case "Es Teh":
+                case "Aqua 600ml":
                     mTitle.add(minuman);
                     mQuantity.add(1);
                     mItemPrice.add(3000);
                     msubTotal.add(3000);
                     adapter.notifyDataSetChanged();
                     countTotal();
-
+                    break;
+                case "Sprite":
+                case "Fanta":
+                case "Coca-Cola":
+                case "Kopi Hitam":
+                case "Milo":
+                    mTitle.add(minuman);
+                    mQuantity.add(1);
+                    mItemPrice.add(5000);
+                    msubTotal.add(5000);
+                    adapter.notifyDataSetChanged();
+                    countTotal();
+                    break;
+                case "Frestea":
+                case "Es Kopi Durian":
+                    mTitle.add(minuman);
+                    mQuantity.add(1);
+                    mItemPrice.add(7000);
+                    msubTotal.add(7000);
+                    adapter.notifyDataSetChanged();
+                    countTotal();
                     break;
             }
         }

@@ -29,7 +29,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                android:backgroundTint="#99417E77"
+                android:backgroundTint="#E6417E77"
                 android:contentDescription="transaction"
                 android:paddingTop="20dp"
                 android:paddingBottom="20dp"
