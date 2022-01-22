@@ -33,14 +33,15 @@ public class DialogKonfirmasi extends AppCompatDialogFragment {
         View view = inflater.inflate(R.layout.dialog_konfirmasi, null);
 
         int kembalian = getArguments().getInt("kembalian");
-        Log.i("Kembalianmu... ", "" + kembalian);
+        int customerNumber_update = getArguments().getInt("customerNumber_update") + 1;
+//        Log.i("Kembalianmu... ", "" + kembalian);
 
 
         builder.setView(view);
 
 
         kembalianTextView = view.findViewById(R.id.kembalianTextView);
-        kembalianTextView.setText("(Kembalian: Rp" + kembalian +")");
+        kembalianTextView.setText("(Kembalian: Rp" + kembalian +"  ||  Nomor: "+ customerNumber_update + ") ");
         okButton = view.findViewById(R.id.okButton);
 
 
