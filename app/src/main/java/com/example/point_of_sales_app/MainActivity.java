@@ -38,11 +38,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Date;
 import java.sql.Timestamp;
+import java.util.Map;
 
 import com.example.point_of_sales_app.fragments.*;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity implements dialog.DialogBuyListener, SecondFragment.MinumanFragment{
 
@@ -94,6 +99,12 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
     DatabaseReference reffStatus;
     DatabaseReference reffItem;
     DatabaseReference reffQuantity;
+    DatabaseReference reffStock;
+    DatabaseReference reffStockUpdate;
+    stockCount stockCount;
+    Query queryGetStock;
+    Map<String, Object> map;
+    int stockChange_int;
 
     public void onClick(View view) {
             switch (view.getTag().toString()) {
@@ -183,10 +194,15 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
         //Databse Connection and Setter and Getter for Input
         transactionDetail = new transactionDetail();
         transactionDetailStatus = new transactionDetailStatus();
+        stockCount = new stockCount();
         reff = FirebaseDatabase.getInstance("https://point-of-sales-app-25e2b-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference().child("TransacationDetail");
         reffStatus = FirebaseDatabase.getInstance("https://point-of-sales-app-25e2b-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("TransacationStatus");
+        reffStock = FirebaseDatabase.getInstance("https://point-of-sales-app-25e2b-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("StockCount");
+        reffStockUpdate = FirebaseDatabase.getInstance().getReference("StockCount");
+//        reffStock.addListenerForSingleValueEvent(valueEventListenerStock);
         reffItem = FirebaseDatabase.getInstance("https://point-of-sales-app-25e2b-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference().child("TransacationStatus").child("Makanan");
         reffQuantity = FirebaseDatabase.getInstance("https://point-of-sales-app-25e2b-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference().child("TransacationStatus").child("Quantity");
+
 
 
         //ButtonLayout Sidebar
@@ -438,20 +454,18 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
             transactionDetail.setTransactionID(transactionID_update);
             transactionDetail.setTransactionDetailID(transactionID_update);
             transactionDetail.setItemID(namaMakananPesanan);
-            transactionDetail.setQuantity(jumlahMakananPesanan);
+            transactionDetail.setQuantity((1)*jumlahMakananPesanan);
             transactionDetail.setLineTotal(subTotalMakananPesanann);
             transactionDetail.setTimeStamp(getTimeStamp());
             transactionDetail.setStatus("Serving");
             reff.push().setValue(transactionDetail);
+            queryGetStock = reffStockUpdate.child(namaMakananPesanan);
+            stockCount.setStockChange((-1)*jumlahMakananPesanan);
+            stockCount.setNamaItem(namaMakananPesanan);
+            reffStock.push().setValue(stockCount);
 
-            //Transaction Status
-//            transactionDetailStatus.setCustomerNumber(customerNumber_update);
-//            while (k < mTitle.size()) {
-//
-//                transactionDetailStatus.setItemID();
-//
-//                k++;
-//            }
+
+
             j++;
         }
         while (k<mTitle.size()){
@@ -548,4 +562,22 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
         startActivity(intent);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
+
+    ValueEventListener valueEventListenerStock = new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                map = (Map<String, Object>) snapshot.getValue();
+                Object customerNumber_object = map.get("StockChange");
+                String stockChange_string = String.valueOf(customerNumber_object);
+                stockChange_int = Integer.parseInt(stockChange_string);
+                Log.i("StockChangeLoop:", ""+stockChange_int);
+            }
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError error) {
+
+        }
+    };
 }
