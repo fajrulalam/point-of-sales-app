@@ -40,6 +40,7 @@ import java.util.Date;
 import java.sql.Timestamp;
 import java.util.Map;
 
+import com.bumptech.glide.Glide;
 import com.example.point_of_sales_app.fragments.*;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.DataSnapshot;
@@ -48,6 +49,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity implements dialog.DialogBuyListener, SecondFragment.MinumanFragment{
 
@@ -106,6 +108,12 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
     Map<String, Object> map;
     int stockChange_int;
 
+    //Imageviews
+
+
+
+
+
     public void onClick(View view) {
             switch (view.getTag().toString()) {
                 case "Bakso":
@@ -132,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                     adapter.notifyDataSetChanged();
                     countTotal();
                     break;
-                case "Nasi Bungkus A":
+                case "NasBung A":
                     mTitle.add(view.getTag().toString());
                     mQuantity.add(1);
                     mItemPrice.add(3000);
@@ -140,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                     adapter.notifyDataSetChanged();
                     countTotal();
                     break;
-                case "Nasi Bungkus B":
+                case "NasBung B":
                     mTitle.add(view.getTag().toString());
                     mQuantity.add(1);
                     mItemPrice.add(5000);
@@ -156,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
 //                    adapter.notifyDataSetChanged();
 //                    countTotal();
 //                    break;
-                case "Kentang Goreng":
+                case "Kentang G":
                     mTitle.add(view.getTag().toString());
                     mQuantity.add(1);
                     mItemPrice.add(5000);
@@ -185,6 +193,14 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
 
+
+
+
+        //ImageViews
+//        bakso =
+
+//        Glide.with(MainActivity.this).load("http://goo.gl/gEgYUd").into((ImageView) findViewById(R.id.gambarBakso));
+
         //TransactionID
         sharedPreferencesTransactionID = getSharedPreferences("transactionID", 0);
         SharedPreferences.Editor editor = sharedPreferencesTransactionID.edit();
@@ -197,6 +213,8 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
 
 //        editor.putInt("transactionID", 1);
 //        editor.commit();
+
+        //Picasso Imageviews
 
         transactionID_update = sharedPreferencesTransactionID.getInt("transactionID", 0);
         customerNumber_update = sharedPreferencesCustomerID.getInt("CustomerID", 0);
@@ -311,6 +329,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
 
         adapter = new MyAdapter(this, mTitle, mQuantity, mItemPrice, msubTotal);
         listView.setAdapter(adapter);
+
 
 
         countTotal();

@@ -10,7 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -80,6 +83,23 @@ public class FirstFragment extends Fragment implements View.OnClickListener{
         makanan10 = (CardView) view.findViewById(R.id.makanan10);
         makanan11 = (CardView) view.findViewById(R.id.makanan11);
         makanan12 = (CardView) view.findViewById(R.id.makanan12);
+
+        ImageView bakso = view.findViewById(R.id.gambarBakso);;
+        ImageView kentangGoreng = view.findViewById(R.id.gambarKentangGorengnew);
+        ImageView nasiLauk = view.findViewById(R.id.gambarAyam);
+        ImageView nasbungA = view.findViewById(R.id.gambarNasBungA);
+        ImageView nasbungB = view.findViewById(R.id.gambarNasBungB);
+        ImageView popmie = view.findViewById(R.id.gambarPopmie);
+        ImageView siomay = view.findViewById(R.id.gambarSiomay);
+
+        Glide.with(this).load(R.drawable.bakso_compressed).into(bakso);
+        Glide.with(this).load(R.drawable.kentang_compressed).into(kentangGoreng);
+        Glide.with(this).load(R.drawable.nasi_ayam_compressed).into(nasiLauk);
+        Glide.with(this).load(R.drawable.nasbung_a_compressed).into(nasbungA);
+        Glide.with(this).load(R.drawable.nasbung_b_compressed).into(nasbungB);
+        Glide.with(this).load(R.drawable.popmie_compressed).into(popmie);
+        Glide.with(this).load(R.drawable.siomay_compressed).into(siomay);
+
 
 
 

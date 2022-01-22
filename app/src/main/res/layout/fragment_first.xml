@@ -54,7 +54,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="100dp"
                             android:layout_marginBottom="0dp"
-                            app:srcCompat="@drawable/bakso_compressed" />
+                            app:srcCompat="@drawable/bakso_compressed"
+                            />
 
                         <TextView
                             android:id="@+id/namaMakananBakso"
@@ -93,7 +94,7 @@
                     android:elevation="1dp"
                     android:foreground="@drawable/effec"
                     android:onClick="onClick"
-                    android:tag="Kentang Goreng"
+                    android:tag="Kentang G"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="10dp">
 
@@ -109,7 +110,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="100dp"
                             android:layout_marginBottom="0dp"
-                            app:srcCompat="@drawable/kentang_compressed" />
+                             />
 
 
                         <TextView
@@ -163,7 +164,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="100dp"
                             android:layout_marginBottom="0dp"
-                            app:srcCompat="@drawable/nasi_ayam_compressed" />
+                             />
                         <!--                    app:srcCompat="@drawable/bakso_compressed" -->
 
 
@@ -203,7 +204,7 @@
                     android:elevation="1dp"
                     android:foreground="@drawable/effec"
                     android:onClick="onClick"
-                    android:tag="Nasi Bungkus A"
+                    android:tag="NasBung A"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="10dp">
 
@@ -219,7 +220,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="100dp"
                             android:layout_marginBottom="0dp"
-                            app:srcCompat="@drawable/nasbung_a_compressed" />
+                             />
 
                         <TextView
                             android:id="@+id/namaMakananNasBungA"
@@ -258,7 +259,7 @@
                     android:elevation="1dp"
                     android:foreground="@drawable/effec"
                     android:onClick="onClick"
-                    android:tag="Nasi Bungkus B"
+                    android:tag="NasBung B"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="10dp">
 
@@ -274,7 +275,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="100dp"
                             android:layout_marginBottom="0dp"
-                            app:srcCompat="@drawable/nasbung_b_compressed" />
+                             />
                         <!--                    app:srcCompat="@drawable/bakso_compressed" -->
 
 
@@ -324,11 +325,11 @@
 
 
                         <ImageView
-                            android:id="@+id/gambarSosis_Nugget"
+                            android:id="@+id/gambarPopmie"
                             android:layout_width="match_parent"
                             android:layout_height="90dp"
                             android:layout_marginBottom="10dp"
-                            app:srcCompat="@drawable/popmie_compressed" />
+                             />
                         <!--                    app:srcCompat="@drawable/bakso_compressed" -->
 
 
@@ -379,11 +380,11 @@
 
 
                         <ImageView
-                            android:id="@+id/gambarTahuGoreng"
+                            android:id="@+id/gambarSiomay"
                             android:layout_width="match_parent"
                             android:layout_height="100dp"
                             android:layout_marginBottom="0dp"
-                            app:srcCompat="@drawable/siomay_compressed" />
+                             />
 
                         <TextView
                             android:id="@+id/namaMakananTahuGoreng"
