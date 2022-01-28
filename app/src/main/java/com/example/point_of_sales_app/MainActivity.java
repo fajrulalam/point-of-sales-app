@@ -61,6 +61,8 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
     ArrayList<Integer> msubTotal;
     int kembalian;
     TextView totalCount;
+    TextView nomorPelangganBerikutnya;
+    int nextCustomerNumber;
 
     //Buttons
     Button buttonBeli;
@@ -196,8 +198,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
 
 
 
-        //ImageViews
-//        bakso =
+    nomorPelangganBerikutnya = findViewById(R.id.nomorPelangganBerikutnya);
 
 //        Glide.with(MainActivity.this).load("http://goo.gl/gEgYUd").into((ImageView) findViewById(R.id.gambarBakso));
 
@@ -259,6 +260,8 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                 editor1.commit();
                 customerNumber_update = sharedPreferencesCustomerID.getInt("customerID", 0);
                 Toast.makeText(getApplicationContext(), "Nomor Pelanggan sudah diulang dari 1", Toast.LENGTH_SHORT).show();
+                nextCustomerNumber = customerNumber_update +1;
+                nomorPelangganBerikutnya.setText("Nomor Berikutnya: " +nextCustomerNumber);
             }
         });
 
@@ -493,17 +496,23 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
             transactionDetail.setQuantity((1)*jumlahMakananPesanan);
             transactionDetail.setLineTotal(subTotalMakananPesanann);
             transactionDetail.setTimeStamp(getTimeStamp());
+            transactionDetail.setDay_itemID(getDate() + "_" + namaMakananPesanan);
+            transactionDetail.setMonth_itemID(getMonth() + "_" + namaMakananPesanan);
+            transactionDetail.setYear_itemID(getYear() + "_" + namaMakananPesanan);
             transactionDetail.setStatus("Serving");
             reff.push().setValue(transactionDetail);
             queryGetStock = reffStockUpdate.child(namaMakananPesanan);
             stockCount.setStockChange((-1)*jumlahMakananPesanan);
             stockCount.setNamaItem(namaMakananPesanan);
+            stockCount.setDay_itemID(getDate() + "_" + namaMakananPesanan);
+            stockCount.setMonth_itemID(getMonth() + "_" + namaMakananPesanan);
+            stockCount.setYear_itemID(getYear() + "_" + namaMakananPesanan);
             reffStock.push().setValue(stockCount);
-
-
 
             j++;
         }
+        nextCustomerNumber = customerNumber_update +1;
+        nomorPelangganBerikutnya.setText("Nomor Berikutnya: " +nextCustomerNumber);
         while (k<mTitle.size()){
             namaSubMakanan_container = mTitle.get(k);
             jumlahSub_container = String.valueOf(mQuantity.get(k));
@@ -636,4 +645,31 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
 
         }
     };
+
+    public String getDate() {
+        Long datetime = System.currentTimeMillis();
+        Timestamp timestamp = new Timestamp(datetime);
+        String date_full = (String) String.valueOf(timestamp);
+        String date = date_full.substring(0, 10);
+        return date;
+    }
+
+    public String getMonth() {
+        Long datetime = System.currentTimeMillis();
+        Timestamp timestamp = new Timestamp(datetime);
+        String date_full = (String) String.valueOf(timestamp);
+        String month = date_full.substring(0, 7);
+        return month;
+    }
+
+    public String getYear() {
+        Long datetime = System.currentTimeMillis();
+        Timestamp timestamp = new Timestamp(datetime);
+        String date_full = (String) String.valueOf(timestamp);
+        String year = date_full.substring(0, 4);
+        return year;
+    }
+
+
+
 }

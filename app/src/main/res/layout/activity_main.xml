@@ -77,6 +77,16 @@
             android:layout_marginTop="20dp"
             android:backgroundTint="#A1417E77">
 
+            <TextView
+                android:id="@+id/nomorPelangganBerikutnya"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="15dp"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center"
+                android:text="Nomor Berikutnya: "
+                android:textColor="@color/white" />
+
         </androidx.cardview.widget.CardView>
 
 
