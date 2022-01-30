@@ -507,6 +507,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
             pesanan.put("month_itemID", getMonth()+"_"+namaMakananPesanan);
             pesanan.put("year_itemID", getYear() +"_"+namaMakananPesanan);
             pesanan.put("quantity", jumlahMakananPesanan);
+            pesanan.put("lineTotal", subTotalMakananPesanann);
             pesanan.put("timeStamp", getTimeStamp());
             pesanan.put("Status", "Serving");
 
@@ -560,18 +561,17 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
 //            quantityHashMap.put(""+ k, mQuantity.get(k));
             k++;
         }
-        Log.i("Ulang dari 1", ""+customerNumber_update);
-        status.put("customerNumber", customerNumber_update);
-        status.put("itemID", namaSubMakanan);
-        status.put("quantity", jumlahSub);
-        status.put("status", "Serving");
+//        status.put("customerNumber", customerNumber_update);
+//        status.put("itemID", namaSubMakanan);
+//        status.put("quantity", jumlahSub);
+//        status.put("status", "Serving");
 
-        fs.collection("Status").document(""+customerNumber_update).set(status);
+//        fs.collection("Status").document(""+customerNumber_update).set(status);
 
-//        reffStatus.child(""+customerNumber_update).child("status").setValue("Serving");
-//        reffStatus.child(""+customerNumber_update).child("customerNumber").setValue(customerNumber_update);
-//        reffStatus.child(""+customerNumber_update).child("quantity").setValue(jumlahSub);
-//        reffStatus.child(""+customerNumber_update).child("itemID").setValue(namaSubMakanan);
+        reffStatus.child(""+customerNumber_update).child("status").setValue("Serving");
+        reffStatus.child(""+customerNumber_update).child("customerNumber").setValue(customerNumber_update);
+        reffStatus.child(""+customerNumber_update).child("quantity").setValue(jumlahSub);
+        reffStatus.child(""+customerNumber_update).child("itemID").setValue(namaSubMakanan);
 //        transactionDetailStatus.setCustomerNumber(customerNumber_update);
 //        transactionDetailStatus.setItemID(namaSubMakanan);
 //        transactionDetailStatus.setQuantity(jumlahSub);
