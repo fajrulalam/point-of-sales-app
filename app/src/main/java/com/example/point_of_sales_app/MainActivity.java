@@ -49,6 +49,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity implements dialog.DialogBuyListener, SecondFragment.MinumanFragment{
@@ -110,7 +111,13 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
     Map<String, Object> map;
     int stockChange_int;
 
-    //Imageviews
+
+    //Firestore
+    FirebaseFirestore fs;
+    Map<String, Object> pesanan = new HashMap<>();
+    Map<String, Object> stockChange = new HashMap<>();
+    Map<String, Object> status = new HashMap<>();
+
 
 
 
@@ -194,6 +201,10 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();
+
+
+        //Firestore TEst
+        fs = FirebaseFirestore.getInstance();
 
 
 
@@ -489,25 +500,46 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
             namaMakananPesanan = mTitle.get(j);
             jumlahMakananPesanan = mQuantity.get(j);
             subTotalMakananPesanann = msubTotal.get(j);
-            transactionDetail.setNoCustomer(customerNumber_update);
-            transactionDetail.setTransactionID(transactionID_update);
-            transactionDetail.setTransactionDetailID(transactionID_update);
-            transactionDetail.setItemID(namaMakananPesanan);
-            transactionDetail.setQuantity((1)*jumlahMakananPesanan);
-            transactionDetail.setLineTotal(subTotalMakananPesanann);
-            transactionDetail.setTimeStamp(getTimeStamp());
-            transactionDetail.setDay_itemID(getDate() + "_" + namaMakananPesanan);
-            transactionDetail.setMonth_itemID(getMonth() + "_" + namaMakananPesanan);
-            transactionDetail.setYear_itemID(getYear() + "_" + namaMakananPesanan);
-            transactionDetail.setStatus("Serving");
-            reff.push().setValue(transactionDetail);
-            queryGetStock = reffStockUpdate.child(namaMakananPesanan);
-            stockCount.setStockChange((-1)*jumlahMakananPesanan);
-            stockCount.setNamaItem(namaMakananPesanan);
-            stockCount.setDay_itemID(getDate() + "_" + namaMakananPesanan);
-            stockCount.setMonth_itemID(getMonth() + "_" + namaMakananPesanan);
-            stockCount.setYear_itemID(getYear() + "_" + namaMakananPesanan);
-            reffStock.push().setValue(stockCount);
+
+            pesanan.put("noCustomer", customerNumber_update);
+            pesanan.put("itemID", namaMakananPesanan);
+            pesanan.put("day_itemID", getDate() +"_"+namaMakananPesanan);
+            pesanan.put("month_itemID", getMonth()+"_"+namaMakananPesanan);
+            pesanan.put("year_itemID", getYear() +"_"+namaMakananPesanan);
+            pesanan.put("quantity", jumlahMakananPesanan);
+            pesanan.put("timeStamp", getTimeStamp());
+            pesanan.put("Status", "Serving");
+
+            fs.collection("TransactionDetail").add(pesanan);
+
+
+//            transactionDetail.setNoCustomer(customerNumber_update);
+//            transactionDetail.setTransactionID(transactionID_update);
+//            transactionDetail.setTransactionDetailID(transactionID_update);
+//            transactionDetail.setItemID(namaMakananPesanan);
+//            transactionDetail.setQuantity((1)*jumlahMakananPesanan);
+//            transactionDetail.setLineTotal(subTotalMakananPesanann);
+//            transactionDetail.setTimeStamp(getTimeStamp());
+//            transactionDetail.setDay_itemID(getDate() + "_" + namaMakananPesanan);
+//            transactionDetail.setMonth_itemID(getMonth() + "_" + namaMakananPesanan);
+//            transactionDetail.setYear_itemID(getYear() + "_" + namaMakananPesanan);
+//            transactionDetail.setStatus("Serving");
+//            reff.push().setValue(transactionDetail);
+//            queryGetStock = reffStockUpdate.child(namaMakananPesanan);
+
+            stockChange.put("itemID", namaMakananPesanan);
+            stockChange.put("day_itemID", getDate() +"_"+namaMakananPesanan);
+            stockChange.put("month_itemID", getMonth()+"_"+namaMakananPesanan);
+            stockChange.put("year_itemID", getYear() +"_"+namaMakananPesanan);
+            stockChange.put("quantity", (-1)*jumlahMakananPesanan);
+            fs.collection("Stock").add(stockChange);
+
+//            stockCount.setStockChange((-1)*jumlahMakananPesanan);
+//            stockCount.setNamaItem(namaMakananPesanan);
+//            stockCount.setDay_itemID(getDate() + "_" + namaMakananPesanan);
+//            stockCount.setMonth_itemID(getMonth() + "_" + namaMakananPesanan);
+//            stockCount.setYear_itemID(getYear() + "_" + namaMakananPesanan);
+//            reffStock.push().setValue(stockCount);
 
             j++;
         }
@@ -529,10 +561,17 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
             k++;
         }
         Log.i("Ulang dari 1", ""+customerNumber_update);
-        reffStatus.child(""+customerNumber_update).child("status").setValue("Serving");
-        reffStatus.child(""+customerNumber_update).child("customerNumber").setValue(customerNumber_update);
-        reffStatus.child(""+customerNumber_update).child("quantity").setValue(jumlahSub);
-        reffStatus.child(""+customerNumber_update).child("itemID").setValue(namaSubMakanan);
+        status.put("customerNumber", customerNumber_update);
+        status.put("itemID", namaSubMakanan);
+        status.put("quantity", jumlahSub);
+        status.put("status", "Serving");
+
+        fs.collection("Status").document(""+customerNumber_update).set(status);
+
+//        reffStatus.child(""+customerNumber_update).child("status").setValue("Serving");
+//        reffStatus.child(""+customerNumber_update).child("customerNumber").setValue(customerNumber_update);
+//        reffStatus.child(""+customerNumber_update).child("quantity").setValue(jumlahSub);
+//        reffStatus.child(""+customerNumber_update).child("itemID").setValue(namaSubMakanan);
 //        transactionDetailStatus.setCustomerNumber(customerNumber_update);
 //        transactionDetailStatus.setItemID(namaSubMakanan);
 //        transactionDetailStatus.setQuantity(jumlahSub);
