@@ -68,31 +68,7 @@ public class BackEnd extends AppCompatActivity {
         });
 
         EventChangeListener3();
-//        reffToday.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                int sum = 0;
-//                Log.i("test", "..");
-//                if (snapshot.exists()) {
-//                    for (DataSnapshot ds : snapshot.getChildren()) {
-//                        Map<String, Object> map = (Map<String, Object>) ds.getValue();
-//                        Object subtotal = map.get("lineTotal");
-//                        int pValue = Integer.parseInt(String.valueOf(subtotal));
-//                        sum += pValue;
-//                        totalHariIniTextView.setText(String.valueOf(sum));
-//                    }
-//                } else {
-//                    Log.i("Query", "tidak tepat");
-//                }
-//
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//
-//            }
-//        });
+
 
 
     }
