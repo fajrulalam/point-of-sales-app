@@ -210,6 +210,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
 
 
     nomorPelangganBerikutnya = findViewById(R.id.nomorPelangganBerikutnya);
+    nomorPelangganBerikutnya.setText("Nomor Berikutnya: ");
 
 //        Glide.with(MainActivity.this).load("http://goo.gl/gEgYUd").into((ImageView) findViewById(R.id.gambarBakso));
 
@@ -223,6 +224,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
 //        editor1.commit();
 
 
+
 //        editor.putInt("transactionID", 1);
 //        editor.commit();
 
@@ -230,6 +232,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
 
         transactionID_update = sharedPreferencesTransactionID.getInt("transactionID", 0);
         customerNumber_update = sharedPreferencesCustomerID.getInt("CustomerID", 0);
+        nomorPelangganBerikutnya.setText("Nomor Berikutnya: "+ customerNumber_update);
 
         Log.i("CustomerID", ""+  customerNumber_update);
 
