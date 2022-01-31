@@ -503,16 +503,28 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
             namaMakananPesanan = mTitle.get(j);
             jumlahMakananPesanan = mQuantity.get(j);
             subTotalMakananPesanann = msubTotal.get(j);
-
-            pesanan.put("noCustomer", customerNumber_update);
-            pesanan.put("itemID", namaMakananPesanan);
-            pesanan.put("day_itemID", getDate() +"_"+namaMakananPesanan);
-            pesanan.put("month_itemID", getMonth()+"_"+namaMakananPesanan);
-            pesanan.put("year_itemID", getYear() +"_"+namaMakananPesanan);
-            pesanan.put("quantity", jumlahMakananPesanan);
-            pesanan.put("lineTotal", subTotalMakananPesanann);
-            pesanan.put("timeStamp", getTimeStamp());
-            pesanan.put("Status", "Serving");
+            if (subTotalMakananPesanann == 0) {
+                subTotalMakananPesanann = jumlahMakananPesanan * mItemPrice.get(j);
+                pesanan.put("noCustomer", customerNumber_update);
+                pesanan.put("itemID", namaMakananPesanan);
+                pesanan.put("day_itemID", getDate() +"_"+namaMakananPesanan);
+                pesanan.put("month_itemID", getMonth()+"_"+namaMakananPesanan);
+                pesanan.put("year_itemID", getYear() +"_"+namaMakananPesanan);
+                pesanan.put("quantity", jumlahMakananPesanan);
+                pesanan.put("lineTotal", subTotalMakananPesanann);
+                pesanan.put("timeStamp", getTimeStamp());
+                pesanan.put("Status", "Serving");
+            } else {
+                pesanan.put("noCustomer", customerNumber_update);
+                pesanan.put("itemID", namaMakananPesanan);
+                pesanan.put("day_itemID", getDate() +"_"+namaMakananPesanan);
+                pesanan.put("month_itemID", getMonth()+"_"+namaMakananPesanan);
+                pesanan.put("year_itemID", getYear() +"_"+namaMakananPesanan);
+                pesanan.put("quantity", jumlahMakananPesanan);
+                pesanan.put("lineTotal", subTotalMakananPesanann);
+                pesanan.put("timeStamp", getTimeStamp());
+                pesanan.put("Status", "Serving");
+            }
 
             fs.collection("TransactionDetail").add(pesanan);
 
