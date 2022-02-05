@@ -24,6 +24,7 @@ import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -87,6 +88,10 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
     int jumlahMakananPesanan;
     int hargaMakananPesanan;
     int subTotalMakananPesanann;
+
+    TextView try_bro;
+    CheckBox bungkusCheckbox;
+
 
 
     //DataBase
@@ -205,6 +210,8 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
 
         //Firestore TEst
         fs = FirebaseFirestore.getInstance();
+
+        bungkusCheckbox = (CheckBox) findViewById(R.id.bungkusCheckbox);
 
 
 
@@ -497,6 +504,10 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
         String jumlahSub = "";
         UpdateTransactionID();
         UpdateTCustomerID();
+        int bungkus = 0;
+        if(bungkusCheckbox.isChecked()) {
+            bungkus = 1;
+        }
         //Firebase Database
         while (j <mTitle.size()) {
             //Transaction Detail
@@ -587,6 +598,8 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
         reffStatus.child(""+customerNumber_update).child("customerNumber").setValue(customerNumber_update);
         reffStatus.child(""+customerNumber_update).child("quantity").setValue(jumlahSub);
         reffStatus.child(""+customerNumber_update).child("itemID").setValue(namaSubMakanan);
+        reffStatus.child(""+customerNumber_update).child("bungkus").setValue(bungkus);
+
 //        transactionDetailStatus.setCustomerNumber(customerNumber_update);
 //        transactionDetailStatus.setItemID(namaSubMakanan);
 //        transactionDetailStatus.setQuantity(jumlahSub);
@@ -607,6 +620,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
         Log.i("Customer ID update", "" + customerNumber_update);
 
         ClearOrderList();
+        bungkusCheckbox.setChecked(false);
 
     }
 

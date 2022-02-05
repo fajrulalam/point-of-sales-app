@@ -181,7 +181,27 @@
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"></androidx.viewpager2.widget.ViewPager2>
+
+
+        <CheckBox
+            android:id="@+id/bungkusCheckbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="515dp"
+            android:layout_marginTop="498dp"
+            android:layout_marginEnd="0dp"
+            android:fontFamily="@font/roboto_medium"
+            android:letterSpacing="0.05"
+            android:scaleX="1.1"
+            android:scaleY="1.1"
+            android:text="BUNGKUS"
+            android:textColor="#6A6A6A"
+            android:textSize="10.5dp"
+            android:button="@null"
+            android:drawableRight="?android:attr/listChoiceIndicatorMultiple"/>
+
+
 
     </RelativeLayout>
 
