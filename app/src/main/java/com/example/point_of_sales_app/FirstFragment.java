@@ -84,22 +84,31 @@ public class FirstFragment extends Fragment implements View.OnClickListener{
         makanan11 = (CardView) view.findViewById(R.id.makanan11);
         makanan12 = (CardView) view.findViewById(R.id.makanan12);
 
-        ImageView bakso = view.findViewById(R.id.gambarBakso);;
-        ImageView kentangGoreng = view.findViewById(R.id.gambarKentangGorengnew);
-        ImageView nasiLauk = view.findViewById(R.id.gambarAyam);
-        ImageView nasbungA = view.findViewById(R.id.gambarNasBungA);
-        ImageView nasbungB = view.findViewById(R.id.gambarNasBungB);
-        ImageView popmie = view.findViewById(R.id.gambarPopmie);
-        ImageView siomay = view.findViewById(R.id.gambarSiomay);
+        ImageView gambar1 = view.findViewById(R.id.gambar1);
+        ImageView gambar2 = view.findViewById(R.id.gambar2);
+        ImageView gambar3 = view.findViewById(R.id.gambar3);
+        ImageView gambar4 = view.findViewById(R.id.gambar4);
+        ImageView gambar5 = view.findViewById(R.id.gambar5);
+        ImageView gambar6 = view.findViewById(R.id.gambar6);
+        ImageView gambar7 = view.findViewById(R.id.gambar7);
+        ImageView gambar8 = view.findViewById(R.id.gambar8);
+        ImageView gambar9 = view.findViewById(R.id.gambar9);
+        ImageView gambar10 = view.findViewById(R.id.gambar10);
+        ImageView gambar11 = view.findViewById(R.id.gambar11);
+        ImageView gambar12 = view.findViewById(R.id.gambar12);
 
-        Glide.with(this).load(R.drawable.bakso_compressed).into(bakso);
-        Glide.with(this).load(R.drawable.kentang_compressed).into(kentangGoreng);
-        Glide.with(this).load(R.drawable.nasi_ayam_compressed).into(nasiLauk);
-        Glide.with(this).load(R.drawable.nasbung_a_compressed).into(nasbungA);
-        Glide.with(this).load(R.drawable.nasbung_b_compressed).into(nasbungB);
-        Glide.with(this).load(R.drawable.popmie_compressed).into(popmie);
-        Glide.with(this).load(R.drawable.siomay_compressed).into(siomay);
-
+        Glide.with(this).load(R.drawable.bakso_compressed).into(gambar1);
+        Glide.with(this).load(R.drawable.kentang_compressed).into(gambar2);
+        Glide.with(this).load(R.drawable.mie_ayam).into(gambar3);
+        Glide.with(this).load(R.drawable.nasbung_a_compressed).into(gambar4);
+        Glide.with(this).load(R.drawable.nasbung_b_compressed).into(gambar5);
+        Glide.with(this).load(R.drawable.nasi_ayam_compressed).into(gambar6);
+        Glide.with(this).load(R.drawable.pisang_goreng).into(gambar7);
+        Glide.with(this).load(R.drawable.popmie_compressed).into(gambar8);
+        Glide.with(this).load(R.drawable.sereal_real).into(gambar9);
+        Glide.with(this).load(R.drawable.siomay_compressed).into(gambar10);
+        Glide.with(this).load(R.drawable.sausage).into(gambar11);
+        Glide.with(this).load(R.drawable.tofu).into(gambar12);
 
 
 
