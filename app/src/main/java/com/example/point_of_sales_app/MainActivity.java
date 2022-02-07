@@ -628,18 +628,19 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
 //            quantityHashMap.put(""+ k, mQuantity.get(k));
             k++;
         }
-//        status.put("customerNumber", customerNumber_update);
-//        status.put("itemID", namaSubMakanan);
-//        status.put("quantity", jumlahSub);
-//        status.put("status", "Serving");
+        status.put("customerNumber", customerNumber_update);
+        status.put("itemID", namaSubMakanan);
+        status.put("quantity", jumlahSub);
+        status.put("status", "Serving");
+        status.put("bungkus", bungkus);
+        status.put("total", countTotal());
+        fs.collection("Status").document(""+customerNumber_update).set(status);
 
-//        fs.collection("Status").document(""+customerNumber_update).set(status);
-
-        reffStatus.child(""+customerNumber_update).child("status").setValue("Serving");
-        reffStatus.child(""+customerNumber_update).child("customerNumber").setValue(customerNumber_update);
-        reffStatus.child(""+customerNumber_update).child("quantity").setValue(jumlahSub);
-        reffStatus.child(""+customerNumber_update).child("itemID").setValue(namaSubMakanan);
-        reffStatus.child(""+customerNumber_update).child("bungkus").setValue(bungkus);
+//        reffStatus.child(""+customerNumber_update).child("status").setValue("Serving");
+//        reffStatus.child(""+customerNumber_update).child("customerNumber").setValue(customerNumber_update);
+//        reffStatus.child(""+customerNumber_update).child("quantity").setValue(jumlahSub);
+//        reffStatus.child(""+customerNumber_update).child("itemID").setValue(namaSubMakanan);
+//        reffStatus.child(""+customerNumber_update).child("bungkus").setValue(bungkus);
 
 //        transactionDetailStatus.setCustomerNumber(customerNumber_update);
 //        transactionDetailStatus.setItemID(namaSubMakanan);
