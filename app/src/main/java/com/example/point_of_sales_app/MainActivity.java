@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
 
     TextView try_bro;
     CheckBox bungkusCheckbox;
+    CheckBox pesanCheckbox;
 
 
 
@@ -146,7 +147,15 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                     adapter.notifyDataSetChanged();
                     countTotal();
                     break;
-                case "Nasi Lauk":
+                case "Nasi Ayam":
+                    mTitle.add(view.getTag().toString());
+                    mQuantity.add(1);
+                    mItemPrice.add(7000);
+                    msubTotal.add(7000);
+                    adapter.notifyDataSetChanged();
+                    countTotal();
+                    break;
+                case "Nasi Pindang":
                     mTitle.add(view.getTag().toString());
                     mQuantity.add(1);
                     mItemPrice.add(7000);
@@ -253,6 +262,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
         fs = FirebaseFirestore.getInstance();
 
         bungkusCheckbox = (CheckBox) findViewById(R.id.bungkusCheckbox);
+        pesanCheckbox = findViewById(R.id.pesanCheckbox);
 
 
 
@@ -404,6 +414,11 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
+                if (pesanCheckbox.isChecked()){
+                    bundle.putInt("pesan", 1);
+                } else {
+                    bundle.putInt("pesan", 0);
+                }
                 bundle.putString("totalValue", totalCount.getText().toString());
                 dialog buyDialog = new dialog();
                 buyDialog.setArguments(bundle);
@@ -529,7 +544,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
 
 
     @Override
-    public void countChange(int result) {
+    public void countChange(int result, String waktuPengambilan) {
         Bundle bundle = new Bundle();
         bundle.putInt("kembalian", result);
         bundle.putInt("customerNumber_update", customerNumber_update);
@@ -548,6 +563,8 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
         int bungkus = 0;
         if(bungkusCheckbox.isChecked()) {
             bungkus = 1;
+        } else if (pesanCheckbox.isChecked()) {
+            bungkus = 2;
         }
         //Firebase Database
         while (j <mTitle.size()) {
@@ -579,6 +596,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
             }
 
             fs.collection("TransactionDetail").add(pesanan);
+
 
 
 //            transactionDetail.setNoCustomer(customerNumber_update);
@@ -634,6 +652,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
         status.put("status", "Serving");
         status.put("bungkus", bungkus);
         status.put("total", countTotal());
+        status.put("waktuPengambilan", waktuPengambilan);
         fs.collection("Status").document(""+customerNumber_update).set(status);
 
         fs.collection("OrderHistory").document(""+transactionID_update).set(status);

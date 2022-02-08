@@ -227,7 +227,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/montserrat_bold"
-                            android:text="NasBung A"
+                            android:text="NasBung 3k"
                             android:textAlignment="center"
                             android:textSize="18dp" />
 
@@ -283,7 +283,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/montserrat_bold"
-                            android:text="NasBung B"
+                            android:text="NasBung 5k"
                             android:textAlignment="center"
                             android:textSize="18dp" />
 
@@ -311,7 +311,7 @@
                     android:elevation="1dp"
                     android:foreground="@drawable/effec"
                     android:onClick="onClick"
-                    android:tag="Nasi Lauk"
+                    android:tag="Nasi Ayam"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="10dp">
 
@@ -336,7 +336,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/montserrat_bold"
-                            android:text="Nasi Lauk"
+                            android:text="Nasi Ayam"
                             android:textAlignment="center"
                             android:textSize="18dp" />
 
@@ -365,7 +365,7 @@
                     android:elevation="1dp"
                     android:foreground="@drawable/effec"
                     android:onClick="onClick"
-                    android:tag="Pisang G"
+                    android:tag="Nasi Pindang"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="10dp">
 
@@ -388,7 +388,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/montserrat_bold"
-                            android:text="Pisang G"
+                            android:text="Nasi Pindang"
                             android:textAlignment="center"
                             android:textSize="18dp" />
 
@@ -419,7 +419,7 @@
                     android:elevation="1dp"
                     android:foreground="@drawable/effec"
                     android:onClick="onClick"
-                    android:tag="Popmie"
+                    android:tag="Pisang G"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="10dp">
 
@@ -444,7 +444,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/montserrat_bold"
-                            android:text="Popmie"
+                            android:text="Pisang G"
                             android:textAlignment="center"
                             android:textSize="18dp" />
 
@@ -472,7 +472,7 @@
                     android:elevation="1dp"
                     android:foreground="@drawable/effec"
                     android:onClick="onClick"
-                    android:tag="Sereal"
+                    android:tag="Popmie"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="10dp">
 
@@ -497,7 +497,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/montserrat_bold"
-                            android:text="Sereal"
+                            android:text="Popmie"
                             android:textAlignment="center"
                             android:textSize="18dp" />
 
@@ -527,7 +527,7 @@
                     android:elevation="1dp"
                     android:foreground="@drawable/effec"
                     android:onClick="onClick"
-                    android:tag="Siomay"
+                    android:tag="Sereal"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="10dp">
 
@@ -550,7 +550,60 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/montserrat_bold"
-                            android:text="Siomay"
+                            android:text="Sereal"
+                            android:textAlignment="center"
+                            android:textSize="18dp" />
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="850dp">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/makanan40"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:clickable="true"
+                    android:elevation="1dp"
+                    android:foreground="@drawable/effec"
+                    android:onClick="onClick"
+                    android:tag="Tahu G"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+
+                        <ImageView
+                            android:id="@+id/gambar13"
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:layout_marginBottom="0dp" />
+
+                        <TextView
+                            android:id="@+id/nama13"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:text="Tahu Goreng"
                             android:textAlignment="center"
                             android:textSize="18dp" />
 
@@ -581,7 +634,7 @@
                     android:elevation="1dp"
                     android:foreground="@drawable/effec"
                     android:onClick="onClick"
-                    android:tag="Sosis Naget"
+                    android:tag="Siomay"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="10dp">
 
@@ -606,7 +659,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/montserrat_bold"
-                            android:text="Sosis Naget"
+                            android:text="Siomay"
                             android:textAlignment="center"
                             android:textSize="18dp" />
 
@@ -634,7 +687,7 @@
                     android:elevation="1dp"
                     android:foreground="@drawable/effec"
                     android:onClick="onClick"
-                    android:tag="Tahu G"
+                    android:tag="Sosis Naget"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="10dp">
 
@@ -658,7 +711,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/montserrat_bold"
-                            android:text="Tahu Goreng"
+                            android:text="Sosis Naget"
                             android:textAlignment="center"
                             android:textSize="18dp" />
 

@@ -96,6 +96,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener{
         ImageView gambar10 = view.findViewById(R.id.gambar10);
         ImageView gambar11 = view.findViewById(R.id.gambar11);
         ImageView gambar12 = view.findViewById(R.id.gambar12);
+        ImageView gambar13 = view.findViewById(R.id.gambar13);
 
         Glide.with(this).load(R.drawable.bakso_compressed).into(gambar1);
         Glide.with(this).load(R.drawable.kentang_compressed).into(gambar2);
@@ -103,12 +104,13 @@ public class FirstFragment extends Fragment implements View.OnClickListener{
         Glide.with(this).load(R.drawable.nasbung_a_compressed).into(gambar4);
         Glide.with(this).load(R.drawable.nasbung_b_compressed).into(gambar5);
         Glide.with(this).load(R.drawable.nasi_ayam_compressed).into(gambar6);
-        Glide.with(this).load(R.drawable.pisang_goreng).into(gambar7);
-        Glide.with(this).load(R.drawable.popmie_compressed).into(gambar8);
-        Glide.with(this).load(R.drawable.sereal_real).into(gambar9);
-        Glide.with(this).load(R.drawable.siomay_compressed).into(gambar10);
-        Glide.with(this).load(R.drawable.sausage).into(gambar11);
-        Glide.with(this).load(R.drawable.tofu).into(gambar12);
+        Glide.with(this).load(R.drawable.nasi_pindang).into(gambar7);
+        Glide.with(this).load(R.drawable.pisang_goreng).into(gambar8);
+        Glide.with(this).load(R.drawable.popmie_compressed).into(gambar9);
+        Glide.with(this).load(R.drawable.sereal_real).into(gambar10);
+        Glide.with(this).load(R.drawable.siomay_compressed).into(gambar11);
+        Glide.with(this).load(R.drawable.sausage).into(gambar12);
+        Glide.with(this).load(R.drawable.tofu).into(gambar13);
 
 
 

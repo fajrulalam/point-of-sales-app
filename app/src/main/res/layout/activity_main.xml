@@ -191,15 +191,34 @@
             android:layout_marginStart="515dp"
             android:layout_marginTop="498dp"
             android:layout_marginEnd="0dp"
+            android:button="@null"
+            android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
             android:fontFamily="@font/roboto_medium"
             android:letterSpacing="0.05"
             android:scaleX="1.1"
             android:scaleY="1.1"
             android:text="BUNGKUS"
             android:textColor="#6A6A6A"
-            android:textSize="10.5dp"
+            android:textSize="10.5dp" />
+
+
+        <CheckBox
+            android:id="@+id/pesanCheckbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="515dp"
+            android:layout_marginEnd="515dp"
+            android:layout_marginBottom="515dp"
             android:button="@null"
-            android:drawableRight="?android:attr/listChoiceIndicatorMultiple"/>
+            android:drawableLeft="?android:attr/listChoiceIndicatorMultiple"
+            android:fontFamily="@font/roboto_medium"
+            android:letterSpacing="0.05"
+            android:scaleX="1.1"
+            android:scaleY="1.1"
+            android:text="PESAN"
+            android:textColor="#6A6A6A"
+            android:textSize="10.5dp" />
 
 
 

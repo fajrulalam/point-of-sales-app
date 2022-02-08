@@ -32,12 +32,79 @@
         android:layout_marginTop="5dp"
         android:gravity="center"
         android:text="(total)"/>
+    <RelativeLayout
+        android:id="@+id/pesan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/totalTextView">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
+
+            <TextView
+                android:id="@+id/waktuPengambilanTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Waktu Pengambilan"
+                android:layout_alignBaseline="@+id/diambilKapanJam"
+                android:textSize="14sp"
+                android:textColor="#9F9F9F"
+                android:fontFamily="@font/poppins_regular"
+                android:layout_marginStart="0dp"
+                android:layout_marginRight="10dp"/>
+
+
+            <EditText
+                android:id="@+id/diambilKapanJam"
+                android:inputType = "number"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:hint="00"
+                android:layout_toEndOf="@id/waktuPengambilanTextView"
+                android:layout_marginLeft="10dp"
+                />
+            <TextView
+                android:id="@+id/pemisah"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/diambilKapanJam"
+                android:text=":"
+                android:textSize="12sp"
+                android:fontFamily="@font/montserrat_bold"
+
+                android:layout_toEndOf="@id/diambilKapanJam"/>
+            <EditText
+                android:id="@+id/diambilKapanMenit"
+                android:inputType = "number"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@+id/pemisah"
+                android:gravity="center"
+                android:hint="00"
+                />
+
+
+
+
+        </RelativeLayout>
+
+
+
+
+    </RelativeLayout>
+
+
 
     <Button
         android:id="@+id/cancelButton"
         android:layout_width="85dp"
         android:layout_height="46dp"
-        android:layout_below="@+id/totalTextView"
+        android:layout_below="@+id/pesan"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         android:layout_toStartOf="@+id/okButton"
@@ -50,7 +117,7 @@
         android:id="@+id/okButton"
         android:layout_width="85dp"
         android:layout_height="46dp"
-        android:layout_below="@+id/totalTextView"
+        android:layout_below="@+id/pesan"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
