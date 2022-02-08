@@ -636,6 +636,8 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
         status.put("total", countTotal());
         fs.collection("Status").document(""+customerNumber_update).set(status);
 
+        fs.collection("OrderHistory").document(""+transactionID_update).set(status);
+
 //        reffStatus.child(""+customerNumber_update).child("status").setValue("Serving");
 //        reffStatus.child(""+customerNumber_update).child("customerNumber").setValue(customerNumber_update);
 //        reffStatus.child(""+customerNumber_update).child("quantity").setValue(jumlahSub);
