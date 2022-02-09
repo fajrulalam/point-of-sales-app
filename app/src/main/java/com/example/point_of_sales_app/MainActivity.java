@@ -405,6 +405,20 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
         adapter = new MyAdapter(this, mTitle, mQuantity, mItemPrice, msubTotal);
         listView.setAdapter(adapter);
 
+        pesanCheckbox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (pesanCheckbox.isChecked()) {
+                    bungkusCheckbox.setChecked(false);
+                    bungkusCheckbox.setVisibility(View.GONE);
+                } else {
+                    bungkusCheckbox.setChecked(false);
+                    bungkusCheckbox.setVisibility(View.VISIBLE);
+                }
+
+            }
+        });
+
 
 
         countTotal();
@@ -416,6 +430,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                 Bundle bundle = new Bundle();
                 if (pesanCheckbox.isChecked()){
                     bundle.putInt("pesan", 1);
+
                 } else {
                     bundle.putInt("pesan", 0);
                 }
@@ -684,6 +699,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
 
         ClearOrderList();
         bungkusCheckbox.setChecked(false);
+        pesanCheckbox.setChecked(false);
 
     }
 

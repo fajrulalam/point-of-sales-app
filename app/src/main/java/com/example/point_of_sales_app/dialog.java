@@ -82,6 +82,8 @@ public class dialog extends AppCompatDialogFragment {
         okButton = view.findViewById(R.id.okButton);
         cancelButton = view.findViewById(R.id.cancelButton);
         editText.setTransformationMethod(new NumericKeyBoardTransformationMethod());
+        diambilKapanMenit.setTransformationMethod(new NumericKeyBoardTransformationMethod());
+        diambilKapanJam.setTransformationMethod(new NumericKeyBoardTransformationMethod());
 
         if (pesan == 0) {
             pesanRelativeLayout.setVisibility(View.GONE);
@@ -136,6 +138,8 @@ public class dialog extends AppCompatDialogFragment {
                 String uangYangDikembalikan = editText.getText().toString();
                 String waktuPengambilan = diambilKapanJam.getText().toString() + ":" + diambilKapanMenit.getText().toString();
                 if (pesan == 0) {
+                    diambilKapanMenit.setText("00");
+                    diambilKapanJam.setText("00");
                     waktuPengambilan = "Tidak Memesan";
                 }
                 try {

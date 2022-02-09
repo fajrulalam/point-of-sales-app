@@ -16,13 +16,13 @@
 
     <EditText
         android:id="@+id/uangYangDiterima"
-        android:inputType = "numberPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/judul"
         android:layout_marginTop="10dp"
         android:gravity="center"
-        android:hint="Uang yang diterima..." />
+        android:hint="Uang yang diterima..."
+        android:inputType="numberPassword" />
 
     <TextView
         android:id="@+id/totalTextView"
@@ -58,15 +58,14 @@
 
             <EditText
                 android:id="@+id/diambilKapanJam"
-                android:inputType = "number"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
+                android:layout_toEndOf="@id/waktuPengambilanTextView"
                 android:gravity="center"
                 android:hint="00"
-                android:layout_toEndOf="@id/waktuPengambilanTextView"
-                android:layout_marginLeft="10dp"
-                />
+                android:inputType="numberPassword" />
             <TextView
                 android:id="@+id/pemisah"
                 android:layout_width="wrap_content"
@@ -77,16 +76,16 @@
                 android:fontFamily="@font/montserrat_bold"
 
                 android:layout_toEndOf="@id/diambilKapanJam"/>
+
             <EditText
                 android:id="@+id/diambilKapanMenit"
-                android:inputType = "number"
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_toEndOf="@+id/pemisah"
                 android:gravity="center"
                 android:hint="00"
-                />
+                android:inputType="numberPassword" />
 
 
 
