@@ -700,6 +700,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
         ClearOrderList();
         bungkusCheckbox.setChecked(false);
         pesanCheckbox.setChecked(false);
+        bungkusCheckbox.setVisibility(View.VISIBLE);
 
     }
 
