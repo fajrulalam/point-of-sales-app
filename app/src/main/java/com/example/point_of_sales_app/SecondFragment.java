@@ -82,6 +82,7 @@ public class SecondFragment extends Fragment implements View.OnClickListener {
         minumanList.add("Fanta");
         minumanList.add("Floridina");
         minumanList.add("Frestea");
+        minumanList.add("Isoplus");
         minumanList.add("Kopi Hitam");
         minumanList.add("Milo");
         minumanList.add("Sprite");

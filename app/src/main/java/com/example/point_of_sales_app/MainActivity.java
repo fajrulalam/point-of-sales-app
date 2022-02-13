@@ -758,6 +758,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                 case "Coca-Cola":
                 case "Kopi Hitam":
                 case "Floridina":
+                case "Isoplus":
                 case "Milo":
                     mTitle.add(minuman);
                     mQuantity.add(1);
