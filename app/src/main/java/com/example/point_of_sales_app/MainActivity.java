@@ -243,6 +243,14 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                     adapter.notifyDataSetChanged();
                     countTotal();
                     break;
+                case "Nasi Telur":
+                    mTitle.add(view.getTag().toString());
+                    mQuantity.add(1);
+                    mItemPrice.add(5000);
+                    msubTotal.add(5000);
+                    adapter.notifyDataSetChanged();
+                    countTotal();
+                    break;
 
                 default:
                     Toast.makeText(this, "Ndak masuk", Toast.LENGTH_SHORT).show();
@@ -749,6 +757,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                 case "Fanta":
                 case "Coca-Cola":
                 case "Kopi Hitam":
+                case "Floridina":
                 case "Milo":
                     mTitle.add(minuman);
                     mQuantity.add(1);

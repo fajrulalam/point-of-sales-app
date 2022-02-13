@@ -97,6 +97,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener{
         ImageView gambar11 = view.findViewById(R.id.gambar11);
         ImageView gambar12 = view.findViewById(R.id.gambar12);
         ImageView gambar13 = view.findViewById(R.id.gambar13);
+        ImageView gambar14 = view.findViewById(R.id.gambar14);
 
         Glide.with(this).load(R.drawable.bakso_compressed).into(gambar1);
         Glide.with(this).load(R.drawable.kentang_compressed).into(gambar2);
@@ -111,6 +112,7 @@ public class FirstFragment extends Fragment implements View.OnClickListener{
         Glide.with(this).load(R.drawable.siomay_compressed).into(gambar11);
         Glide.with(this).load(R.drawable.sausage).into(gambar12);
         Glide.with(this).load(R.drawable.tofu).into(gambar13);
+        Glide.with(this).load(R.drawable.egg_rice).into(gambar14);
 
 
 
