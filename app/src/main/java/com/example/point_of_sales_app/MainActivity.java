@@ -9,6 +9,7 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -30,6 +31,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +45,7 @@ import java.util.Map;
 
 import com.bumptech.glide.Glide;
 import com.example.point_of_sales_app.fragments.*;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -50,6 +53,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
@@ -61,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
     ArrayList<Integer> mQuantity; //int mQuantity[] = {2, 3, 2, 5};
     ArrayList<Integer> mItemPrice; //mItemPrice[] = {7000, 7000, 5000, 3000};
     ArrayList<Integer> msubTotal;
+    ArrayList<Integer> mQuantityUrut;
     int kembalian;
     TextView totalCount;
     TextView nomorPelangganBerikutnya;
@@ -123,6 +129,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
     Map<String, Object> pesanan = new HashMap<>();
     Map<String, Object> stockChange = new HashMap<>();
     Map<String, Object> status = new HashMap<>();
+    Map<String, Object> dailyTranscation = new HashMap<>();
 
 
 
@@ -134,6 +141,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                 case "Bakso":
                     mTitle.add(view.getTag().toString());
                     mQuantity.add(1);
+                    mQuantityUrut.set(0 , 1);
                     mItemPrice.add(7000);
                     msubTotal.add(7000);
                     adapter.notifyDataSetChanged();
@@ -142,6 +150,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                 case "Siomay":
                     mTitle.add(view.getTag().toString());
                     mQuantity.add(1);
+                    mQuantityUrut.set(12 , 1);
                     mItemPrice.add(7000);
                     msubTotal.add(7000);
                     adapter.notifyDataSetChanged();
@@ -150,6 +159,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                 case "Nasi Ayam":
                     mTitle.add(view.getTag().toString());
                     mQuantity.add(1);
+                    mQuantityUrut.set(5 , 1);
                     mItemPrice.add(7000);
                     msubTotal.add(7000);
                     adapter.notifyDataSetChanged();
@@ -158,6 +168,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                 case "Nasi Pindang":
                     mTitle.add(view.getTag().toString());
                     mQuantity.add(1);
+                    mQuantityUrut.set(6 , 1);
                     mItemPrice.add(7000);
                     msubTotal.add(7000);
                     adapter.notifyDataSetChanged();
@@ -166,6 +177,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                 case "NasBung A":
                     mTitle.add(view.getTag().toString());
                     mQuantity.add(1);
+                    mQuantityUrut.set(3 , 1);
                     mItemPrice.add(3000);
                     msubTotal.add(3000);
                     adapter.notifyDataSetChanged();
@@ -174,6 +186,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                 case "NasBung B":
                     mTitle.add(view.getTag().toString());
                     mQuantity.add(1);
+                    mQuantityUrut.set(4 , 1);
                     mItemPrice.add(5000);
                     msubTotal.add(5000);
                     adapter.notifyDataSetChanged();
@@ -190,6 +203,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                 case "Kentang G":
                     mTitle.add(view.getTag().toString());
                     mQuantity.add(1);
+                    mQuantityUrut.set(1 , 1);
                     mItemPrice.add(5000);
                     msubTotal.add(5000);
                     adapter.notifyDataSetChanged();
@@ -198,6 +212,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                 case "Popmie":
                     mTitle.add(view.getTag().toString());
                     mQuantity.add(1);
+                    mQuantityUrut.set(9 , 1);
                     mItemPrice.add(7000);
                     msubTotal.add(7000);
                     adapter.notifyDataSetChanged();
@@ -206,6 +221,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                 case "Tahu G":
                     mTitle.add(view.getTag().toString());
                     mQuantity.add(1);
+                    mQuantityUrut.set(11 , 1);
                     mItemPrice.add(5000);
                     msubTotal.add(5000);
                     adapter.notifyDataSetChanged();
@@ -214,6 +230,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                 case "Mie Ayam":
                     mTitle.add(view.getTag().toString());
                     mQuantity.add(1);
+                    mQuantityUrut.set(2 , 1);
                     mItemPrice.add(7000);
                     msubTotal.add(7000);
                     adapter.notifyDataSetChanged();
@@ -222,6 +239,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                 case "Pisang G":
                     mTitle.add(view.getTag().toString());
                     mQuantity.add(1);
+                    mQuantityUrut.set(8 , 1);
                     mItemPrice.add(5000);
                     msubTotal.add(5000);
                     adapter.notifyDataSetChanged();
@@ -230,6 +248,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                 case "Sosis Naget":
                     mTitle.add(view.getTag().toString());
                     mQuantity.add(1);
+                    mQuantityUrut.set(13 , 1);
                     mItemPrice.add(7000);
                     msubTotal.add(7000);
                     adapter.notifyDataSetChanged();
@@ -238,6 +257,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                 case "Sereal":
                     mTitle.add(view.getTag().toString());
                     mQuantity.add(1);
+                    mQuantityUrut.set(10 , 1);
                     mItemPrice.add(5000);
                     msubTotal.add(5000);
                     adapter.notifyDataSetChanged();
@@ -246,6 +266,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                 case "Nasi Telur":
                     mTitle.add(view.getTag().toString());
                     mQuantity.add(1);
+                    mQuantityUrut.set(9 , 1);
                     mItemPrice.add(5000);
                     msubTotal.add(5000);
                     adapter.notifyDataSetChanged();
@@ -352,6 +373,13 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
         mQuantity = new ArrayList<>();
         mItemPrice = new ArrayList<>();
         msubTotal = new ArrayList<>();
+        mQuantityUrut = new ArrayList<>();
+
+        int i = 0;
+        while (i < 26) {
+            mQuantityUrut.add(0);
+            i++;
+        }
 
         //Initialize Total Calculator
         totalCount = findViewById(R.id.total);
@@ -410,7 +438,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
 
         listView = findViewById(R.id.listview);
 
-        adapter = new MyAdapter(this, mTitle, mQuantity, mItemPrice, msubTotal);
+        adapter = new MyAdapter(this, mTitle, mQuantity, mItemPrice, msubTotal, mQuantityUrut);
         listView.setAdapter(adapter);
 
         pesanCheckbox.setOnClickListener(new View.OnClickListener() {
@@ -452,6 +480,9 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
     }
 
 
+
+
+
     //Update Transaction ID
     public int UpdateTransactionID() {
         SharedPreferences.Editor editor = sharedPreferencesTransactionID.edit();
@@ -477,14 +508,18 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
         ArrayList<Integer> rQuantity;
         ArrayList<Integer> ritemPrice;
         ArrayList<Integer> rsubTotal;
+        ArrayList<Integer> rQuantityUrut;
 
-        MyAdapter(Context c, ArrayList<String> title, ArrayList<Integer> quantity, ArrayList<Integer> price, ArrayList<Integer> subTotal) {
+
+        MyAdapter(Context c, ArrayList<String> title, ArrayList<Integer> quantity, ArrayList<Integer> price, ArrayList<Integer> subTotal, ArrayList<Integer> quantityUrut) {
             super(c, R.layout.list_transaction, R.id.itemName, title);
             this.context = c;
             this.rTitle = title;
             this.rQuantity = quantity;
             this.ritemPrice = price;
             this.rsubTotal = subTotal;
+            this.rQuantityUrut = quantityUrut;
+
 
         }
 
@@ -506,13 +541,13 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                 public void onClick(View view) {
                     int newQuant = rQuantity.get(position) + 1;
                     rQuantity.set(position, newQuant);
-                    Log.i("ppp: ", "" + rQuantity.get(position));
+
                     int subtotals = (int) ritemPrice.get(position) * rQuantity.get(position);
                     rsubTotal.set(position, subtotals);
-                    Log.i("Subtotal...", "is updated to " + subtotals);
                     subtotal.setText("" + subtotals);
                     quantity.setText("" + rQuantity.get(position));
                     countTotal();
+                    updateQuantity(rTitle.get(position), newQuant);
                 }
             });
 
@@ -521,12 +556,14 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                 public void onClick(View view) {
                     int newQuant = rQuantity.get(position) - 1;
                     rQuantity.set(position, newQuant);
-                    Log.i("ppp: ", "" + rQuantity.get(position));
                     int subtotals = (int) ritemPrice.get(position) * rQuantity.get(position);
                     rsubTotal.set(position, subtotals);
                     Log.i("Subtotal...", "is updated to " + subtotals);
-                    subtotal.setText("" + subtotals);
+                    subtotal.setText(String.valueOf(subtotals));
                     quantity.setText("" + rQuantity.get(position));
+                    countTotal();
+                    updateQuantity(rTitle.get(position), newQuant);
+
 
                     if (newQuant == 0) {
                         rTitle.remove(position);
@@ -545,6 +582,119 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
             subtotal.setText("" + subtotals);
             return row;
 
+        }
+
+        public void updateQuantity(String item, int sum){
+            switch (item) {
+
+                //Makanan
+                case "Bakso":
+                    rQuantityUrut.set(0, sum);
+                    mQuantityUrut.set(0, sum);
+                    break;
+                case "Kentang G":
+                     rQuantityUrut.set(1, sum);
+                     mQuantityUrut.set(1, sum);
+                    break;
+                case "Mie Ayam":
+                     rQuantityUrut.set(2, sum);
+                     mQuantityUrut.set(2, sum);
+                    break;
+                case "NasBung A":
+                     rQuantityUrut.set(3, sum);
+                     mQuantityUrut.set(3, sum);
+                    break;
+                case "NasBung B":
+                     rQuantityUrut.set(4, sum);
+                     mQuantityUrut.set(4, sum);
+                    break;
+                case "Nasi Ayam":
+                     rQuantityUrut.set(5, sum);
+                     mQuantityUrut.set(5, sum);
+                    break;
+                case "Nasi Pindang":
+                     rQuantityUrut.set(6, sum);
+                     mQuantityUrut.set(6, sum);
+                    break;
+                case "Nasi Telur":
+                     rQuantityUrut.set(7, sum);
+                     mQuantityUrut.set(7, sum);
+                    break;
+                case "Pisang G":
+                     rQuantityUrut.set(8, sum);
+                     mQuantityUrut.set(8, sum);
+                    break;
+                case "Popmie":
+                     rQuantityUrut.set(9, sum);
+                     mQuantityUrut.set(9, sum);
+                    break;
+                case "Sereal":
+                     rQuantityUrut.set(10, sum);
+                     mQuantityUrut.set(10, sum);
+                    break;
+                case "Tahu G":
+                     rQuantityUrut.set(11, sum);
+                     mQuantityUrut.set(11, sum);
+                    break;
+                case "Siomay":
+                     rQuantityUrut.set(12, sum);
+                     mQuantityUrut.set(12, sum);
+                    break;
+                case "Sosis Naget":
+                     rQuantityUrut.set(13, sum);
+                     mQuantityUrut.set(13, sum);
+                    break;
+
+                    //Minuman
+                case "Aqua 600ml":
+                     rQuantityUrut.set(14, sum);
+                     mQuantityUrut.set(14, sum);
+                    break;
+                case "Coca Cola":
+                     rQuantityUrut.set(15, sum);
+                     mQuantityUrut.set(15, sum);
+                    break;
+                case "Es Kopi Durian":
+                     rQuantityUrut.set(16, sum);
+                     mQuantityUrut.set(16, sum);
+                    break;
+                case "Es Teh":
+                     rQuantityUrut.set(17, sum);
+                     mQuantityUrut.set(17, sum);
+                    break;
+                case "Fanta":
+                     rQuantityUrut.set(18, sum);
+                     mQuantityUrut.set(18, sum);
+                    break;
+                case "Floridina":
+                     rQuantityUrut.set(19, sum);
+                     mQuantityUrut.set(19, sum);
+                case "Frestea":
+                     rQuantityUrut.set(20, sum);
+                     mQuantityUrut.set(20, sum);
+                    break;
+                case "Isoplus":
+                     rQuantityUrut.set(21, sum);
+                     mQuantityUrut.set(21, sum);
+                    break;
+                case "Kopi Hitam":
+                     rQuantityUrut.set(22, sum);
+                     mQuantityUrut.set(22, sum);
+                    break;
+                case "Milo":
+                     rQuantityUrut.set(23, sum);
+                     mQuantityUrut.set(23, sum);
+                    break;
+                case "Sprite":
+                     rQuantityUrut.set(24, sum);
+                     mQuantityUrut.set(24, sum);
+                    break;
+                case "Teh Pucuk Harum":
+                     rQuantityUrut.set(25, sum);
+                     mQuantityUrut.set(25, sum);
+                    break;
+
+            }
         }
     }
 
@@ -577,6 +727,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
         int i = 0;
         int j = 0;
         int k = 0;
+        int l = 0;
         String namaSubMakanan_container = "";
         String namaSubMakanan = "";
         String jumlahSub_container = "";
@@ -590,6 +741,95 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
             bungkus = 2;
         }
         //Firebase Database
+        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Fetching Data...");
+        progressDialog.show();
+
+        fs.collection("DailyTransaction").document(getDate()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (!documentSnapshot.exists()) {
+                    dailyTranscation.put("Bakso", mQuantityUrut.get(0));
+                    dailyTranscation.put("Kentang G", mQuantityUrut.get(1));
+                    dailyTranscation.put("Mie Ayam", mQuantityUrut.get(2));
+                    dailyTranscation.put("NasBung A", mQuantityUrut.get(3));
+                    dailyTranscation.put("NasBung B", mQuantityUrut.get(4));
+                    dailyTranscation.put("Nasi Ayam", mQuantityUrut.get(5));
+                    dailyTranscation.put("Nasi Pindang", mQuantityUrut.get(6));
+                    dailyTranscation.put("Nasi Telur", mQuantityUrut.get(7));
+                    dailyTranscation.put("Pisang G", mQuantityUrut.get(8));
+                    dailyTranscation.put("Popmie", mQuantityUrut.get(9));
+                    dailyTranscation.put("Sereal", mQuantityUrut.get(10));
+                    dailyTranscation.put("Tahu G", mQuantityUrut.get(11));
+                    dailyTranscation.put("Siomay", mQuantityUrut.get(12));
+                    dailyTranscation.put("Sosis Naget", mQuantityUrut.get(13)); //14 Makanan
+
+                    dailyTranscation.put("Aqua 600ml", mQuantityUrut.get(14));
+                    dailyTranscation.put("Coca-Cola", mQuantityUrut.get(15));
+                    dailyTranscation.put("Es Kopi Durian", mQuantityUrut.get(16));
+                    dailyTranscation.put("Es Teh", mQuantityUrut.get(17));
+                    dailyTranscation.put("Fanta", mQuantityUrut.get(18));
+                    dailyTranscation.put("Floridina", mQuantityUrut.get(19));
+                    dailyTranscation.put("Frestea", mQuantityUrut.get(20));
+                    dailyTranscation.put("Isoplus", mQuantityUrut.get(21));
+                    dailyTranscation.put("Kopi Hitam", mQuantityUrut.get(22));
+                    dailyTranscation.put("Milo", mQuantityUrut.get(23));
+                    dailyTranscation.put("Sprite", mQuantityUrut.get(24));
+                    dailyTranscation.put("Teh Pucuk Harum", mQuantityUrut.get(25));
+                    fs.collection("DailyTransaction").document(getDate()).set(dailyTranscation).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            ClearOrderList();
+                            progressDialog.dismiss();
+
+                        }
+                    });
+
+                } else {
+                    fs.collection("DailyTransaction").document(getDate()).update(
+                            "Bakso", FieldValue.increment(mQuantityUrut.get(0)),
+                            "Kentang G", FieldValue.increment(mQuantityUrut.get(1)),
+                            "Mie Ayam", FieldValue.increment(mQuantityUrut.get(2)),
+                            "NasBung A", FieldValue.increment(mQuantityUrut.get(3)),
+                            "NasBung B", FieldValue.increment(mQuantityUrut.get(4)),
+                            "Nasi Ayam", FieldValue.increment(mQuantityUrut.get(5)),
+                            "Nasi Pindang", FieldValue.increment(mQuantityUrut.get(6)),
+                            "Nasi Telur", FieldValue.increment(mQuantityUrut.get(7)),
+                            "Pisang G", FieldValue.increment(mQuantityUrut.get(8)),
+                            "Popmie", FieldValue.increment(mQuantityUrut.get(9)),
+                            "Sereal", FieldValue.increment(mQuantityUrut.get(10)),
+                            "Tahu G", FieldValue.increment(mQuantityUrut.get(11)),
+                            "Siomay", FieldValue.increment(mQuantityUrut.get(12)),
+                            "Sosis Naget", FieldValue.increment(mQuantityUrut.get(13)), //14 Makanan
+
+                            "Aqua 600ml", FieldValue.increment(mQuantityUrut.get(14)),
+                            "Coca-Cola", FieldValue.increment(mQuantityUrut.get(15)),
+                            "Es Kopi Durian", FieldValue.increment(mQuantityUrut.get(16)),
+                            "Es Teh", FieldValue.increment(mQuantityUrut.get(17)),
+                            "Fanta", FieldValue.increment(mQuantityUrut.get(18)),
+                            "Floridina", FieldValue.increment(mQuantityUrut.get(19)),
+                            "Frestea", FieldValue.increment(mQuantityUrut.get(20)),
+                            "Isoplus", FieldValue.increment(mQuantityUrut.get(21)),
+                            "Kopi Hitam", FieldValue.increment(mQuantityUrut.get(22)),
+                            "Milo", FieldValue.increment(mQuantityUrut.get(23)),
+                            "Sprite", FieldValue.increment(mQuantityUrut.get(24)),
+                            "Teh Pucuk Harum", FieldValue.increment(mQuantityUrut.get(25))
+                    ).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Log.i("DALAM Urutan order", "" + mQuantityUrut);
+                            ClearOrderList();
+                            progressDialog.dismiss();
+
+                        }
+                    });
+                }
+            }
+        });
+
+
+
+
         while (j <mTitle.size()) {
             //Transaction Detail
             namaMakananPesanan = mTitle.get(j);
@@ -621,21 +861,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
             fs.collection("TransactionDetail").add(pesanan);
 
 
-
-//            transactionDetail.setNoCustomer(customerNumber_update);
-//            transactionDetail.setTransactionID(transactionID_update);
-//            transactionDetail.setTransactionDetailID(transactionID_update);
-//            transactionDetail.setItemID(namaMakananPesanan);
-//            transactionDetail.setQuantity((1)*jumlahMakananPesanan);
-//            transactionDetail.setLineTotal(subTotalMakananPesanann);
-//            transactionDetail.setTimeStamp(getTimeStamp());
-//            transactionDetail.setDay_itemID(getDate() + "_" + namaMakananPesanan);
-//            transactionDetail.setMonth_itemID(getMonth() + "_" + namaMakananPesanan);
-//            transactionDetail.setYear_itemID(getYear() + "_" + namaMakananPesanan);
-//            transactionDetail.setStatus("Serving");
-//            reff.push().setValue(transactionDetail);
-//            queryGetStock = reffStockUpdate.child(namaMakananPesanan);
-
+            stockChange.put("timeStamp", getTimeStamp());
             stockChange.put("itemID", namaMakananPesanan);
             stockChange.put("day_itemID", getDate() +"_"+namaMakananPesanan);
             stockChange.put("month_itemID", getMonth()+"_"+namaMakananPesanan);
@@ -704,8 +930,9 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
         }
         Log.i("transactionID", ""+transactionID_update);
         Log.i("Customer ID update", "" + customerNumber_update);
+        Log.i("LUAR Urutan order", "" + mQuantityUrut);
 
-        ClearOrderList();
+
         bungkusCheckbox.setChecked(false);
         pesanCheckbox.setChecked(false);
         bungkusCheckbox.setVisibility(View.VISIBLE);
@@ -719,6 +946,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
     }
 
     public void ClearOrderList(){
+        mQuantityUrut.clear();
         int i = 0;
         while (i < mTitle.size()) {
             mTitle.remove(i);
@@ -726,11 +954,16 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
             msubTotal.remove(i);
             mItemPrice.remove(i);
             totalCount.setText("0");
-            adapter.notifyDataSetChanged();
-//            i++;
 
+            }
+        adapter.notifyDataSetChanged();
+        i = 0;
+        while (i < 26) {
+            mQuantityUrut.add(0);
+            i++;
         }
     }
+
 
     @Override
     public void kirimDataMinuman(String minuman) {
@@ -744,8 +977,25 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
         } else {
             switch (minuman) {
                 case "Teh Pucuk Harum":
+                    mQuantityUrut.set(25 , 1);
+                    mTitle.add(minuman);
+                    mQuantity.add(1);
+                    mItemPrice.add(3000);
+                    msubTotal.add(3000);
+                    adapter.notifyDataSetChanged();
+                    countTotal();
+                    break;
                 case "Es Teh":
+                    mQuantityUrut.set(17 , 1);
+                    mTitle.add(minuman);
+                    mQuantity.add(1);
+                    mItemPrice.add(3000);
+                    msubTotal.add(3000);
+                    adapter.notifyDataSetChanged();
+                    countTotal();
+                    break;
                 case "Aqua 600ml":
+                    mQuantityUrut.set(14 , 1);
                     mTitle.add(minuman);
                     mQuantity.add(1);
                     mItemPrice.add(3000);
@@ -754,12 +1004,61 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                     countTotal();
                     break;
                 case "Sprite":
+                    mQuantityUrut.set(24 , 1);
+                    mTitle.add(minuman);
+                    mQuantity.add(1);
+                    mItemPrice.add(3000);
+                    msubTotal.add(3000);
+                    adapter.notifyDataSetChanged();
+                    countTotal();
+                    break;
                 case "Fanta":
+                    mQuantityUrut.set(18 , 1);
+                    mTitle.add(minuman);
+                    mQuantity.add(1);
+                    mItemPrice.add(3000);
+                    msubTotal.add(3000);
+                    adapter.notifyDataSetChanged();
+                    countTotal();
+                    break;
                 case "Coca-Cola":
+                    mQuantityUrut.set(15 , 1);
+                    mTitle.add(minuman);
+                    mQuantity.add(1);
+                    mItemPrice.add(3000);
+                    msubTotal.add(3000);
+                    adapter.notifyDataSetChanged();
+                    countTotal();
+                    break;
                 case "Kopi Hitam":
+                    mQuantityUrut.set(22 , 1);
+                    mTitle.add(minuman);
+                    mQuantity.add(1);
+                    mItemPrice.add(3000);
+                    msubTotal.add(3000);
+                    adapter.notifyDataSetChanged();
+                    countTotal();
+                    break;
                 case "Floridina":
+                    mQuantityUrut.set(19 , 1);
+                    mTitle.add(minuman);
+                    mQuantity.add(1);
+                    mItemPrice.add(3000);
+                    msubTotal.add(3000);
+                    adapter.notifyDataSetChanged();
+                    countTotal();
+                    break;
                 case "Isoplus":
+                    mQuantityUrut.set(21 , 1);
+                    mTitle.add(minuman);
+                    mQuantity.add(1);
+                    mItemPrice.add(3000);
+                    msubTotal.add(3000);
+                    adapter.notifyDataSetChanged();
+                    countTotal();
+                    break;
                 case "Milo":
+                    mQuantityUrut.set(23 , 1);
                     mTitle.add(minuman);
                     mQuantity.add(1);
                     mItemPrice.add(5000);
@@ -768,6 +1067,14 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                     countTotal();
                     break;
                 case "Frestea":
+                    mQuantityUrut.set(11 , 1);
+                    mTitle.add(minuman);
+                    mQuantity.add(1);
+                    mItemPrice.add(3000);
+                    msubTotal.add(3000);
+                    adapter.notifyDataSetChanged();
+                    countTotal();
+                    break;
                 case "Es Kopi Durian":
                     mTitle.add(minuman);
                     mQuantity.add(1);
