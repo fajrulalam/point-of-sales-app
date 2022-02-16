@@ -780,7 +780,6 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
 
                 } else {
                     fs.collection("Stock").document("Stocks").update(
-                            "total", FieldValue.increment(countTotal()),
                             "Bakso", FieldValue.increment((-1)*mQuantityUrut.get(0)),
                             "Kentang G", FieldValue.increment((-1)*mQuantityUrut.get(1)),
                             "Mie Ayam", FieldValue.increment((-1)*mQuantityUrut.get(2)),
