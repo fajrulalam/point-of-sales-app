@@ -27,6 +27,22 @@
                 android:foreground="@drawable/effec">
 
                 <androidx.cardview.widget.CardView
+                    android:id="@+id/cover00"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:backgroundTint="#4D000000"
+                    app:cardElevation="11dp"
+                    app:cardCornerRadius="10dp"
+                    android:visibility="gone"/>
+
+
+
+
+                <androidx.cardview.widget.CardView
                     android:id="@+id/makanan00"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
@@ -41,6 +57,8 @@
                     android:tag="Bakso"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="10dp">
+
+
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -70,6 +88,8 @@
 
 
                 </androidx.cardview.widget.CardView>
+
+
 
             </RelativeLayout>
 

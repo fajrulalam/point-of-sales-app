@@ -3,6 +3,7 @@ package com.example.point_of_sales_app;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.PagerAdapter;
@@ -99,6 +100,8 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
     CheckBox bungkusCheckbox;
     CheckBox pesanCheckbox;
 
+    CardView cover00;
+
 
 
     //DataBase
@@ -146,6 +149,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                     msubTotal.add(7000);
                     adapter.notifyDataSetChanged();
                     countTotal();
+
                     break;
                 case "Siomay":
                     mTitle.add(view.getTag().toString());
@@ -292,6 +296,8 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
 
         bungkusCheckbox = (CheckBox) findViewById(R.id.bungkusCheckbox);
         pesanCheckbox = findViewById(R.id.pesanCheckbox);
+
+
 
 
 
@@ -749,6 +755,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if (!documentSnapshot.exists()) {
+                    dailyTranscation.put("date", getDate());
                     dailyTranscation.put("Bakso", (-1)*mQuantityUrut.get(0));
                     dailyTranscation.put("Kentang G", (-1)*mQuantityUrut.get(1));
                     dailyTranscation.put("Mie Ayam", (-1)*mQuantityUrut.get(2));
@@ -1024,7 +1031,6 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
         Log.i("transactionID", ""+transactionID_update);
         Log.i("Customer ID update", "" + customerNumber_update);
         Log.i("LUAR Urutan order", "" + mQuantityUrut);
-
 
         bungkusCheckbox.setChecked(false);
         pesanCheckbox.setChecked(false);
