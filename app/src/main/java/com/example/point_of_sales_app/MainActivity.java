@@ -133,6 +133,8 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
     Map<String, Object> stockChange = new HashMap<>();
     Map<String, Object> status = new HashMap<>();
     Map<String, Object> dailyTranscation = new HashMap<>();
+    Map<String, Object> monthlyTransaction = new HashMap<>();
+    Map<String, Object> yearlyTransaction = new HashMap<>();
 
 
 
@@ -751,11 +753,154 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
         progressDialog.setMessage("Fetching Data...");
         progressDialog.show();
 
+
+        fs.collection("YearlyTransaction").document(getYear()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (!documentSnapshot.exists()) {
+                    yearlyTransaction.put("date", getDate());
+                    yearlyTransaction.put("month", getMonth());
+                    yearlyTransaction.put("year", getYear());
+                    yearlyTransaction.put("total", countTotal());
+                    yearlyTransaction.put("Bakso", mQuantityUrut.get(0));
+                    yearlyTransaction.put("Kentang G", mQuantityUrut.get(1));
+                    yearlyTransaction.put("Mie Ayam", mQuantityUrut.get(2));
+                    yearlyTransaction.put("NasBung A", mQuantityUrut.get(3));
+                    yearlyTransaction.put("NasBung B", mQuantityUrut.get(4));
+                    yearlyTransaction.put("Nasi Ayam", mQuantityUrut.get(5));
+                    yearlyTransaction.put("Nasi Pindang", mQuantityUrut.get(6));
+                    yearlyTransaction.put("Nasi Telur", mQuantityUrut.get(7));
+                    yearlyTransaction.put("Pisang G", mQuantityUrut.get(8));
+                    yearlyTransaction.put("Popmie", mQuantityUrut.get(9));
+                    yearlyTransaction.put("Sereal", mQuantityUrut.get(10));
+                    yearlyTransaction.put("Tahu G", mQuantityUrut.get(11));
+                    yearlyTransaction.put("Siomay", mQuantityUrut.get(12));
+                    yearlyTransaction.put("Sosis Naget", mQuantityUrut.get(13)); //14 Makanan
+
+                    yearlyTransaction.put("Aqua 600ml", mQuantityUrut.get(14));
+                    yearlyTransaction.put("Coca-Cola", mQuantityUrut.get(15));
+                    yearlyTransaction.put("Es Kopi Durian", mQuantityUrut.get(16));
+                    yearlyTransaction.put("Es Teh", mQuantityUrut.get(17));
+                    yearlyTransaction.put("Fanta", mQuantityUrut.get(18));
+                    yearlyTransaction.put("Floridina", mQuantityUrut.get(19));
+                    yearlyTransaction.put("Frestea", mQuantityUrut.get(20));
+                    yearlyTransaction.put("Isoplus", mQuantityUrut.get(21));
+                    yearlyTransaction.put("Kopi Hitam", mQuantityUrut.get(22));
+                    yearlyTransaction.put("Milo", mQuantityUrut.get(23));
+                    yearlyTransaction.put("Sprite", mQuantityUrut.get(24));
+                    yearlyTransaction.put("Teh Pucuk Harum", mQuantityUrut.get(25));
+                    fs.collection("YearlyTransaction").document(getYear()).set(yearlyTransaction);
+
+                } else {
+                    fs.collection("YearlyTransaction").document(getYear()).update(
+                            "total", FieldValue.increment(countTotal()),
+                            "Bakso", FieldValue.increment(mQuantityUrut.get(0)),
+                            "Kentang G", FieldValue.increment(mQuantityUrut.get(1)),
+                            "Mie Ayam", FieldValue.increment(mQuantityUrut.get(2)),
+                            "NasBung A", FieldValue.increment(mQuantityUrut.get(3)),
+                            "NasBung B", FieldValue.increment(mQuantityUrut.get(4)),
+                            "Nasi Ayam", FieldValue.increment(mQuantityUrut.get(5)),
+                            "Nasi Pindang", FieldValue.increment(mQuantityUrut.get(6)),
+                            "Nasi Telur", FieldValue.increment(mQuantityUrut.get(7)),
+                            "Pisang G", FieldValue.increment(mQuantityUrut.get(8)),
+                            "Popmie", FieldValue.increment(mQuantityUrut.get(9)),
+                            "Sereal", FieldValue.increment(mQuantityUrut.get(10)),
+                            "Tahu G", FieldValue.increment(mQuantityUrut.get(11)),
+                            "Siomay", FieldValue.increment(mQuantityUrut.get(12)),
+                            "Sosis Naget", FieldValue.increment(mQuantityUrut.get(13)), //14 Makanan
+
+                            "Aqua 600ml", FieldValue.increment(mQuantityUrut.get(14)),
+                            "Coca-Cola", FieldValue.increment(mQuantityUrut.get(15)),
+                            "Es Kopi Durian", FieldValue.increment(mQuantityUrut.get(16)),
+                            "Es Teh", FieldValue.increment(mQuantityUrut.get(17)),
+                            "Fanta", FieldValue.increment(mQuantityUrut.get(18)),
+                            "Floridina", FieldValue.increment(mQuantityUrut.get(19)),
+                            "Frestea", FieldValue.increment(mQuantityUrut.get(20)),
+                            "Isoplus", FieldValue.increment(mQuantityUrut.get(21)),
+                            "Kopi Hitam", FieldValue.increment(mQuantityUrut.get(22)),
+                            "Milo", FieldValue.increment(mQuantityUrut.get(23)),
+                            "Sprite", FieldValue.increment(mQuantityUrut.get(24)),
+                            "Teh Pucuk Harum", FieldValue.increment(mQuantityUrut.get(25))
+                    );
+                }
+            }
+        });
+        fs.collection("MonthlyTransaction").document(getMonth()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                if (!documentSnapshot.exists()) {
+                    monthlyTransaction.put("date", getDate());
+                    monthlyTransaction.put("month", getMonth());
+                    monthlyTransaction.put("year", getYear());
+                    monthlyTransaction.put("total", countTotal());
+                    monthlyTransaction.put("Bakso", mQuantityUrut.get(0));
+                    monthlyTransaction.put("Kentang G", mQuantityUrut.get(1));
+                    monthlyTransaction.put("Mie Ayam", mQuantityUrut.get(2));
+                    monthlyTransaction.put("NasBung A", mQuantityUrut.get(3));
+                    monthlyTransaction.put("NasBung B", mQuantityUrut.get(4));
+                    monthlyTransaction.put("Nasi Ayam", mQuantityUrut.get(5));
+                    monthlyTransaction.put("Nasi Pindang", mQuantityUrut.get(6));
+                    monthlyTransaction.put("Nasi Telur", mQuantityUrut.get(7));
+                    monthlyTransaction.put("Pisang G", mQuantityUrut.get(8));
+                    monthlyTransaction.put("Popmie", mQuantityUrut.get(9));
+                    monthlyTransaction.put("Sereal", mQuantityUrut.get(10));
+                    monthlyTransaction.put("Tahu G", mQuantityUrut.get(11));
+                    monthlyTransaction.put("Siomay", mQuantityUrut.get(12));
+                    monthlyTransaction.put("Sosis Naget", mQuantityUrut.get(13)); //14 Makanan
+
+                    monthlyTransaction.put("Aqua 600ml", mQuantityUrut.get(14));
+                    monthlyTransaction.put("Coca-Cola", mQuantityUrut.get(15));
+                    monthlyTransaction.put("Es Kopi Durian", mQuantityUrut.get(16));
+                    monthlyTransaction.put("Es Teh", mQuantityUrut.get(17));
+                    monthlyTransaction.put("Fanta", mQuantityUrut.get(18));
+                    monthlyTransaction.put("Floridina", mQuantityUrut.get(19));
+                    monthlyTransaction.put("Frestea", mQuantityUrut.get(20));
+                    monthlyTransaction.put("Isoplus", mQuantityUrut.get(21));
+                    monthlyTransaction.put("Kopi Hitam", mQuantityUrut.get(22));
+                    monthlyTransaction.put("Milo", mQuantityUrut.get(23));
+                    monthlyTransaction.put("Sprite", mQuantityUrut.get(24));
+                    monthlyTransaction.put("Teh Pucuk Harum", mQuantityUrut.get(25));
+                    fs.collection("MonthlyTransaction").document(getMonth()).set(monthlyTransaction);
+
+
+                } else {
+                    fs.collection("MonthlyTransaction").document(getMonth()).update(
+                            "total", FieldValue.increment(countTotal()),
+                            "Bakso", FieldValue.increment(mQuantityUrut.get(0)),
+                            "Kentang G", FieldValue.increment(mQuantityUrut.get(1)),
+                            "Mie Ayam", FieldValue.increment(mQuantityUrut.get(2)),
+                            "NasBung A", FieldValue.increment(mQuantityUrut.get(3)),
+                            "NasBung B", FieldValue.increment(mQuantityUrut.get(4)),
+                            "Nasi Ayam", FieldValue.increment(mQuantityUrut.get(5)),
+                            "Nasi Pindang", FieldValue.increment(mQuantityUrut.get(6)),
+                            "Nasi Telur", FieldValue.increment(mQuantityUrut.get(7)),
+                            "Pisang G", FieldValue.increment(mQuantityUrut.get(8)),
+                            "Popmie", FieldValue.increment(mQuantityUrut.get(9)),
+                            "Sereal", FieldValue.increment(mQuantityUrut.get(10)),
+                            "Tahu G", FieldValue.increment(mQuantityUrut.get(11)),
+                            "Siomay", FieldValue.increment(mQuantityUrut.get(12)),
+                            "Sosis Naget", FieldValue.increment(mQuantityUrut.get(13)), //14 Makanan
+
+                            "Aqua 600ml", FieldValue.increment(mQuantityUrut.get(14)),
+                            "Coca-Cola", FieldValue.increment(mQuantityUrut.get(15)),
+                            "Es Kopi Durian", FieldValue.increment(mQuantityUrut.get(16)),
+                            "Es Teh", FieldValue.increment(mQuantityUrut.get(17)),
+                            "Fanta", FieldValue.increment(mQuantityUrut.get(18)),
+                            "Floridina", FieldValue.increment(mQuantityUrut.get(19)),
+                            "Frestea", FieldValue.increment(mQuantityUrut.get(20)),
+                            "Isoplus", FieldValue.increment(mQuantityUrut.get(21)),
+                            "Kopi Hitam", FieldValue.increment(mQuantityUrut.get(22)),
+                            "Milo", FieldValue.increment(mQuantityUrut.get(23)),
+                            "Sprite", FieldValue.increment(mQuantityUrut.get(24)),
+                            "Teh Pucuk Harum", FieldValue.increment(mQuantityUrut.get(25))
+                    );
+                }
+            }
+        });
         fs.collection("Stock").document("Stocks").get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if (!documentSnapshot.exists()) {
-                    dailyTranscation.put("date", getDate());
                     dailyTranscation.put("Bakso", (-1)*mQuantityUrut.get(0));
                     dailyTranscation.put("Kentang G", (-1)*mQuantityUrut.get(1));
                     dailyTranscation.put("Mie Ayam", (-1)*mQuantityUrut.get(2));
@@ -822,6 +967,9 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if (!documentSnapshot.exists()) {
+                    dailyTranscation.put("date", getDate());
+                    dailyTranscation.put("month", getMonth());
+                    dailyTranscation.put("year", getYear());
                     dailyTranscation.put("total", countTotal());
                     dailyTranscation.put("Bakso", mQuantityUrut.get(0));
                     dailyTranscation.put("Kentang G", mQuantityUrut.get(1));
@@ -1002,7 +1150,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
         status.put("bungkus", bungkus);
         status.put("total", countTotal());
         status.put("waktuPengambilan", waktuPengambilan);
-//        fs.collection("Status").document(""+customerNumber_update).set(status);
+        fs.collection("Status").document(""+customerNumber_update).set(status);
 
         fs.collection("OrderHistory").document(""+transactionID_update).set(status);
 

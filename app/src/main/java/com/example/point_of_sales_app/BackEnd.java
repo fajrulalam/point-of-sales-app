@@ -74,26 +74,18 @@ public class BackEnd extends AppCompatActivity {
     }
 
     public void EventChangeListener3(){
-        fs.collection("TransactionDetail").orderBy("timeStamp").startAt(getDate()).endAt(getDate()+'\uf8ff')
-                .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        int sum = 0;
-                        Log.i("TAG", "onSuccess: ");
-                        List<DocumentSnapshot> snapshotList = queryDocumentSnapshots.getDocuments();
-                        for (DocumentSnapshot snapshot : snapshotList) {
-                            Map<String, Object> map = (Map<String, Object>) snapshot.getData();
-                            Log.i("TAG", "onSuccess: " + snapshot.getData());
-                            Object subtotal = map.get("lineTotal");
-                            int pValue = Integer.parseInt(String.valueOf(subtotal));
-                            sum += pValue;
-                            totalHariIniTextView.setText("Rp." + sum);
+        fs.collection("DailyTransaction").document(getDate())
+                .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                Map<String, Object> map = (Map<String, Object>) documentSnapshot.getData();
+                Object totalRev = map.get("total");
+                String item_string = totalRev.toString();
+                totalHariIniTextView.setText(item_string);
+                progressDialog.dismiss();
 
-                        }
-                        progressDialog.dismiss();
-                    }
-                });
+            }
+        });
     }
 
 
