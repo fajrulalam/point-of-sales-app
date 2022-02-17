@@ -99,7 +99,6 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
     TextView try_bro;
     CheckBox bungkusCheckbox;
     CheckBox pesanCheckbox;
-
     CardView cover00;
 
 
@@ -273,8 +272,8 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                     mTitle.add(view.getTag().toString());
                     mQuantity.add(1);
                     mQuantityUrut.set(9 , 1);
-                    mItemPrice.add(5000);
-                    msubTotal.add(5000);
+                    mItemPrice.add(7000);
+                    msubTotal.add(7000);
                     adapter.notifyDataSetChanged();
                     countTotal();
                     break;
@@ -1281,8 +1280,8 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                     mQuantityUrut.set(22 , 1);
                     mTitle.add(minuman);
                     mQuantity.add(1);
-                    mItemPrice.add(3000);
-                    msubTotal.add(3000);
+                    mItemPrice.add(5000);
+                    msubTotal.add(5000);
                     adapter.notifyDataSetChanged();
                     countTotal();
                     break;
