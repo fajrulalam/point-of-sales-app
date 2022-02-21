@@ -87,6 +87,7 @@ public class SecondFragment extends Fragment implements View.OnClickListener {
         minumanList.add("Milo");
         minumanList.add("Sprite");
         minumanList.add("Teh Pucuk Harum");
+        minumanList.add("Teh Hangat");
         populateList();
 
         minumanListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -383,7 +383,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
         mQuantityUrut = new ArrayList<>();
 
         int i = 0;
-        while (i < 26) {
+        while (i < 27) {
             mQuantityUrut.add(0);
             i++;
         }
@@ -700,6 +700,9 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                      rQuantityUrut.set(25, sum);
                      mQuantityUrut.set(25, sum);
                     break;
+                case "Teh Panas":
+                    rQuantityUrut.set(26, sum);
+                    mQuantityUrut.set(26, sum);
 
             }
         }
@@ -788,6 +791,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                     yearlyTransaction.put("Milo", mQuantityUrut.get(23));
                     yearlyTransaction.put("Sprite", mQuantityUrut.get(24));
                     yearlyTransaction.put("Teh Pucuk Harum", mQuantityUrut.get(25));
+                    yearlyTransaction.put("Teh Hangat", mQuantityUrut.get(26));
                     fs.collection("YearlyTransaction").document(getYear()).set(yearlyTransaction);
 
                 } else {
@@ -819,7 +823,8 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                             "Kopi Hitam", FieldValue.increment(mQuantityUrut.get(22)),
                             "Milo", FieldValue.increment(mQuantityUrut.get(23)),
                             "Sprite", FieldValue.increment(mQuantityUrut.get(24)),
-                            "Teh Pucuk Harum", FieldValue.increment(mQuantityUrut.get(25))
+                            "Teh Pucuk Harum", FieldValue.increment(mQuantityUrut.get(25)),
+                            "Teh Hangat", FieldValue.increment(mQuantityUrut.get(26))
                     );
                 }
             }
@@ -859,6 +864,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                     monthlyTransaction.put("Milo", mQuantityUrut.get(23));
                     monthlyTransaction.put("Sprite", mQuantityUrut.get(24));
                     monthlyTransaction.put("Teh Pucuk Harum", mQuantityUrut.get(25));
+                    monthlyTransaction.put("Teh Hangat", mQuantityUrut.get(26));
                     fs.collection("MonthlyTransaction").document(getMonth()).set(monthlyTransaction);
 
 
@@ -891,7 +897,8 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                             "Kopi Hitam", FieldValue.increment(mQuantityUrut.get(22)),
                             "Milo", FieldValue.increment(mQuantityUrut.get(23)),
                             "Sprite", FieldValue.increment(mQuantityUrut.get(24)),
-                            "Teh Pucuk Harum", FieldValue.increment(mQuantityUrut.get(25))
+                            "Teh Pucuk Harum", FieldValue.increment(mQuantityUrut.get(25)),
+                            "Teh Hangat", FieldValue.increment(mQuantityUrut.get(26))
                     );
                 }
             }
@@ -927,6 +934,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                     dailyTranscation.put("Milo", (-1)*mQuantityUrut.get(23));
                     dailyTranscation.put("Sprite", (-1)*mQuantityUrut.get(24));
                     dailyTranscation.put("Teh Pucuk Harum", (-1)*mQuantityUrut.get(25));
+                    dailyTranscation.put("Teh Hangat", mQuantityUrut.get(26));
                     fs.collection("Stock").document("Stocks").set(dailyTranscation);
 
                 } else {
@@ -957,6 +965,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                             "Kopi Hitam", FieldValue.increment((-1)*mQuantityUrut.get(22)),
                             "Milo", FieldValue.increment((-1)*mQuantityUrut.get(23)),
                             "Sprite", FieldValue.increment((-1)*mQuantityUrut.get(24)),
+                            "Teh Hangat", FieldValue.increment(mQuantityUrut.get(26)),
                             "Teh Pucuk Harum", FieldValue.increment((-1)*mQuantityUrut.get(25)));
                 }
             }
@@ -997,6 +1006,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                     dailyTranscation.put("Milo", mQuantityUrut.get(23));
                     dailyTranscation.put("Sprite", mQuantityUrut.get(24));
                     dailyTranscation.put("Teh Pucuk Harum", mQuantityUrut.get(25));
+                    yearlyTransaction.put("Teh Hangat", mQuantityUrut.get(26));
                     fs.collection("DailyTransaction").document(getDate()).set(dailyTranscation).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
@@ -1035,6 +1045,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                             "Kopi Hitam", FieldValue.increment(mQuantityUrut.get(22)),
                             "Milo", FieldValue.increment(mQuantityUrut.get(23)),
                             "Sprite", FieldValue.increment(mQuantityUrut.get(24)),
+                            "Teh Hangat", FieldValue.increment(mQuantityUrut.get(26)),
                             "Teh Pucuk Harum", FieldValue.increment(mQuantityUrut.get(25))
                     ).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
@@ -1262,8 +1273,8 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                     mQuantityUrut.set(18 , 1);
                     mTitle.add(minuman);
                     mQuantity.add(1);
-                    mItemPrice.add(3000);
-                    msubTotal.add(3000);
+                    mItemPrice.add(5000);
+                    msubTotal.add(5000);
                     adapter.notifyDataSetChanged();
                     countTotal();
                     break;
@@ -1271,8 +1282,8 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                     mQuantityUrut.set(15 , 1);
                     mTitle.add(minuman);
                     mQuantity.add(1);
-                    mItemPrice.add(3000);
-                    msubTotal.add(3000);
+                    mItemPrice.add(5000);
+                    msubTotal.add(5000);
                     adapter.notifyDataSetChanged();
                     countTotal();
                     break;
@@ -1322,10 +1333,20 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                     countTotal();
                     break;
                 case "Es Kopi Durian":
+                    mQuantityUrut.set(16 , 1);
                     mTitle.add(minuman);
                     mQuantity.add(1);
                     mItemPrice.add(7000);
                     msubTotal.add(7000);
+                    adapter.notifyDataSetChanged();
+                    countTotal();
+                    break;
+                case "Teh Hangat":
+                    mQuantityUrut.set(26, 1);
+                    mTitle.add(minuman);
+                    mQuantity.add(1);
+                    mItemPrice.add(5000);
+                    msubTotal.add(5000);
                     adapter.notifyDataSetChanged();
                     countTotal();
                     break;
