@@ -298,6 +298,18 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
         bungkusCheckbox = (CheckBox) findViewById(R.id.bungkusCheckbox);
         pesanCheckbox = findViewById(R.id.pesanCheckbox);
 
+        Map mapAshiap = new HashMap();
+        mapAshiap.put("ashiap", 99);
+        fs.collection("OrderHistory").document("2").update("ashiapLur", 88);
+
+
+//        fs.collection("DailyTransaction").document("2022-02-17").update("timestamp", FieldValue.serverTimestamp());
+//        fs.collection("DailyTransaction").document("2022-02-19").update("timestamp", FieldValue.serverTimestamp());
+//        fs.collection("DailyTransaction").document("2022-02-20").update("timestamp", FieldValue.serverTimestamp());
+//        fs.collection("DailyTransaction").document("2022-02-21").update("timestamp", FieldValue.serverTimestamp());
+//
+//        fs.collection("MonthlyTransaction").document("2022-02").update("timestamp", FieldValue.serverTimestamp());
+//        fs.collection("YearlyTransaction").document("2022").update("timestamp", FieldValue.serverTimestamp());
 
 
 
@@ -763,6 +775,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                     yearlyTransaction.put("date", getDate());
                     yearlyTransaction.put("month", getMonth());
                     yearlyTransaction.put("year", getYear());
+                    yearlyTransaction.put("timestamp", FieldValue.serverTimestamp());
                     yearlyTransaction.put("total", countTotal());
                     yearlyTransaction.put("Bakso", mQuantityUrut.get(0));
                     yearlyTransaction.put("Kentang G", mQuantityUrut.get(1));
@@ -797,6 +810,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                 } else {
                     fs.collection("YearlyTransaction").document(getYear()).update(
                             "total", FieldValue.increment(countTotal()),
+                            "timestamp", FieldValue.serverTimestamp(),
                             "Bakso", FieldValue.increment(mQuantityUrut.get(0)),
                             "Kentang G", FieldValue.increment(mQuantityUrut.get(1)),
                             "Mie Ayam", FieldValue.increment(mQuantityUrut.get(2)),
@@ -836,6 +850,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                     monthlyTransaction.put("date", getDate());
                     monthlyTransaction.put("month", getMonth());
                     monthlyTransaction.put("year", getYear());
+                    yearlyTransaction.put("timestamp", FieldValue.serverTimestamp());
                     monthlyTransaction.put("total", countTotal());
                     monthlyTransaction.put("Bakso", mQuantityUrut.get(0));
                     monthlyTransaction.put("Kentang G", mQuantityUrut.get(1));
@@ -871,6 +886,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                 } else {
                     fs.collection("MonthlyTransaction").document(getMonth()).update(
                             "total", FieldValue.increment(countTotal()),
+                            "timestamp", FieldValue.serverTimestamp(),
                             "Bakso", FieldValue.increment(mQuantityUrut.get(0)),
                             "Kentang G", FieldValue.increment(mQuantityUrut.get(1)),
                             "Mie Ayam", FieldValue.increment(mQuantityUrut.get(2)),
@@ -979,6 +995,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                     dailyTranscation.put("month", getMonth());
                     dailyTranscation.put("year", getYear());
                     dailyTranscation.put("total", countTotal());
+                    yearlyTransaction.put("timestamp", FieldValue.serverTimestamp());
                     dailyTranscation.put("Bakso", mQuantityUrut.get(0));
                     dailyTranscation.put("Kentang G", mQuantityUrut.get(1));
                     dailyTranscation.put("Mie Ayam", mQuantityUrut.get(2));
@@ -1019,6 +1036,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                 } else {
                     fs.collection("DailyTransaction").document(getDate()).update(
                             "total", FieldValue.increment(countTotal()),
+                            "timestamp", FieldValue.serverTimestamp(),
                             "Bakso", FieldValue.increment(mQuantityUrut.get(0)),
                             "Kentang G", FieldValue.increment(mQuantityUrut.get(1)),
                             "Mie Ayam", FieldValue.increment(mQuantityUrut.get(2)),
