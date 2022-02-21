@@ -303,13 +303,13 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
         fs.collection("OrderHistory").document("2").update("ashiapLur", 88);
 
 
-//        fs.collection("DailyTransaction").document("2022-02-17").update("timestamp", FieldValue.serverTimestamp());
-//        fs.collection("DailyTransaction").document("2022-02-19").update("timestamp", FieldValue.serverTimestamp());
-//        fs.collection("DailyTransaction").document("2022-02-20").update("timestamp", FieldValue.serverTimestamp());
-//        fs.collection("DailyTransaction").document("2022-02-21").update("timestamp", FieldValue.serverTimestamp());
-//
-//        fs.collection("MonthlyTransaction").document("2022-02").update("timestamp", FieldValue.serverTimestamp());
-//        fs.collection("YearlyTransaction").document("2022").update("timestamp", FieldValue.serverTimestamp());
+//        fs.collection("DailyTransaction").document("2022-02-17").update("customerNumber", 61);
+//        fs.collection("DailyTransaction").document("2022-02-19").update("customerNumber", 89);
+//        fs.collection("DailyTransaction").document("2022-02-20").update("customerNumber", 83);
+//        fs.collection("DailyTransaction").document("2022-02-21").update("customerNumber", 69);
+////
+//        fs.collection("MonthlyTransaction").document("2022-02").update("customerNumber",302);
+//        fs.collection("YearlyTransaction").document("2022").update("customerNumber", 302);
 
 
 
@@ -365,12 +365,12 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
         backEndButton = findViewById(R.id.backEndButton);
         mainMenuButton = findViewById(R.id.mainMenuButton);
 
-        backEndButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openBackEnd();
-            }
-        });
+//        backEndButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                openBackEnd();
+//            }
+//        });
 
         restartButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -776,6 +776,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                     yearlyTransaction.put("month", getMonth());
                     yearlyTransaction.put("year", getYear());
                     yearlyTransaction.put("timestamp", FieldValue.serverTimestamp());
+                    yearlyTransaction.put("customerNumber", 1);
                     yearlyTransaction.put("total", countTotal());
                     yearlyTransaction.put("Bakso", mQuantityUrut.get(0));
                     yearlyTransaction.put("Kentang G", mQuantityUrut.get(1));
@@ -811,6 +812,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                     fs.collection("YearlyTransaction").document(getYear()).update(
                             "total", FieldValue.increment(countTotal()),
                             "timestamp", FieldValue.serverTimestamp(),
+                            "customerNumber", FieldValue.increment(1),
                             "Bakso", FieldValue.increment(mQuantityUrut.get(0)),
                             "Kentang G", FieldValue.increment(mQuantityUrut.get(1)),
                             "Mie Ayam", FieldValue.increment(mQuantityUrut.get(2)),
@@ -850,7 +852,8 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                     monthlyTransaction.put("date", getDate());
                     monthlyTransaction.put("month", getMonth());
                     monthlyTransaction.put("year", getYear());
-                    yearlyTransaction.put("timestamp", FieldValue.serverTimestamp());
+                    monthlyTransaction.put("timestamp", FieldValue.serverTimestamp());
+                    monthlyTransaction.put("customerNumber", 1);
                     monthlyTransaction.put("total", countTotal());
                     monthlyTransaction.put("Bakso", mQuantityUrut.get(0));
                     monthlyTransaction.put("Kentang G", mQuantityUrut.get(1));
@@ -887,6 +890,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                     fs.collection("MonthlyTransaction").document(getMonth()).update(
                             "total", FieldValue.increment(countTotal()),
                             "timestamp", FieldValue.serverTimestamp(),
+                            "customerNumber", FieldValue.increment(1),
                             "Bakso", FieldValue.increment(mQuantityUrut.get(0)),
                             "Kentang G", FieldValue.increment(mQuantityUrut.get(1)),
                             "Mie Ayam", FieldValue.increment(mQuantityUrut.get(2)),
@@ -995,7 +999,8 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                     dailyTranscation.put("month", getMonth());
                     dailyTranscation.put("year", getYear());
                     dailyTranscation.put("total", countTotal());
-                    yearlyTransaction.put("timestamp", FieldValue.serverTimestamp());
+                    dailyTranscation.put("timestamp", FieldValue.serverTimestamp());
+                    dailyTranscation.put("customerNumber", 1);
                     dailyTranscation.put("Bakso", mQuantityUrut.get(0));
                     dailyTranscation.put("Kentang G", mQuantityUrut.get(1));
                     dailyTranscation.put("Mie Ayam", mQuantityUrut.get(2));
@@ -1037,6 +1042,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                     fs.collection("DailyTransaction").document(getDate()).update(
                             "total", FieldValue.increment(countTotal()),
                             "timestamp", FieldValue.serverTimestamp(),
+                            "customerNumber", FieldValue.increment(1),
                             "Bakso", FieldValue.increment(mQuantityUrut.get(0)),
                             "Kentang G", FieldValue.increment(mQuantityUrut.get(1)),
                             "Mie Ayam", FieldValue.increment(mQuantityUrut.get(2)),
@@ -1282,8 +1288,8 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                     mQuantityUrut.set(24 , 1);
                     mTitle.add(minuman);
                     mQuantity.add(1);
-                    mItemPrice.add(3000);
-                    msubTotal.add(3000);
+                    mItemPrice.add(5000);
+                    msubTotal.add(5000);
                     adapter.notifyDataSetChanged();
                     countTotal();
                     break;
