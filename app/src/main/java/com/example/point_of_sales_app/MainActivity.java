@@ -46,6 +46,7 @@ import java.util.Map;
 
 import com.bumptech.glide.Glide;
 import com.example.point_of_sales_app.fragments.*;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.database.DataSnapshot;
@@ -862,6 +863,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                     monthlyTransaction.put("NasBung B", mQuantityUrut.get(4));
                     monthlyTransaction.put("Nasi Ayam", mQuantityUrut.get(5));
                     monthlyTransaction.put("Nasi Pindang", mQuantityUrut.get(6));
+                    monthlyTransaction.put("Nasi Pindang", mQuantityUrut.get(6));
                     monthlyTransaction.put("Nasi Telur", mQuantityUrut.get(7));
                     monthlyTransaction.put("Pisang G", mQuantityUrut.get(8));
                     monthlyTransaction.put("Popmie", mQuantityUrut.get(9));
@@ -1078,6 +1080,12 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                             ClearOrderList();
                             progressDialog.dismiss();
 
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
                         }
                     });
                 }
