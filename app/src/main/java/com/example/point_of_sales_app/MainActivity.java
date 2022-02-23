@@ -299,9 +299,9 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
         bungkusCheckbox = (CheckBox) findViewById(R.id.bungkusCheckbox);
         pesanCheckbox = findViewById(R.id.pesanCheckbox);
 
-        Map mapAshiap = new HashMap();
-        mapAshiap.put("ashiap", 99);
-        fs.collection("OrderHistory").document("2").update("ashiapLur", 88);
+//        Map mapAshiap = new HashMap();
+//        mapAshiap.put("ashiap", 99);
+//        fs.collection("OrderHistory").document("2").update("ashiapLur", 88);
 
 
 //        fs.collection("DailyTransaction").document("2022-02-17").update("customerNumber", 61);
@@ -1030,7 +1030,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                     dailyTranscation.put("Milo", mQuantityUrut.get(23));
                     dailyTranscation.put("Sprite", mQuantityUrut.get(24));
                     dailyTranscation.put("Teh Pucuk Harum", mQuantityUrut.get(25));
-                    yearlyTransaction.put("Teh Hangat", mQuantityUrut.get(26));
+                    dailyTranscation.put("Teh Hangat", mQuantityUrut.get(26));
                     fs.collection("DailyTransaction").document(getDate()).set(dailyTranscation).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
@@ -1247,7 +1247,7 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
             }
         adapter.notifyDataSetChanged();
         i = 0;
-        while (i < 26) {
+        while (i < 27 ) {
             mQuantityUrut.add(0);
             i++;
         }
