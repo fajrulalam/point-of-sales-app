@@ -727,7 +727,6 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
         int i = 0;
         int j = 0;
         int k = 0;
-        int l = 0;
         String namaSubMakanan_container = "";
         String namaSubMakanan = "";
         String jumlahSub_container = "";
@@ -1114,26 +1113,26 @@ public class MainActivity extends AppCompatActivity implements dialog.DialogBuyL
                 }
 
             }
-            pesanan.put("noCustomer", customerNumber_update);
-            pesanan.put("itemID", namaMakananPesanan);
-            pesanan.put("day_itemID", getDate() +"_"+namaMakananPesanan);
-            pesanan.put("month_itemID", getMonth()+"_"+namaMakananPesanan);
-            pesanan.put("year_itemID", getYear() +"_"+namaMakananPesanan);
-            pesanan.put("quantity", jumlahMakananPesanan);
-            pesanan.put("lineTotal", subTotalMakananPesanann);
-            pesanan.put("timeStamp", getTimeStamp());
-            pesanan.put("Status", "Serving");
+//            pesanan.put("noCustomer", customerNumber_update);
+//            pesanan.put("itemID", namaMakananPesanan);
+//            pesanan.put("day_itemID", getDate() +"_"+namaMakananPesanan);
+//            pesanan.put("month_itemID", getMonth()+"_"+namaMakananPesanan);
+//            pesanan.put("year_itemID", getYear() +"_"+namaMakananPesanan);
+//            pesanan.put("quantity", jumlahMakananPesanan);
+//            pesanan.put("lineTotal", subTotalMakananPesanann);
+//            pesanan.put("timeStamp", getTimeStamp());
+//            pesanan.put("Status", "Serving");
 
 
 //            fs.collection("TransactionDetail").add(pesanan);
 
-
-            stockChange.put("timeStamp", getTimeStamp());
-            stockChange.put("itemID", namaMakananPesanan);
-            stockChange.put("day_itemID", getDate() +"_"+namaMakananPesanan);
-            stockChange.put("month_itemID", getMonth()+"_"+namaMakananPesanan);
-            stockChange.put("year_itemID", getYear() +"_"+namaMakananPesanan);
-            stockChange.put("quantity", (-1)*jumlahMakananPesanan);
+//
+//            stockChange.put("timeStamp", getTimeStamp());
+//            stockChange.put("itemID", namaMakananPesanan);
+//            stockChange.put("day_itemID", getDate() +"_"+namaMakananPesanan);
+//            stockChange.put("month_itemID", getMonth()+"_"+namaMakananPesanan);
+//            stockChange.put("year_itemID", getYear() +"_"+namaMakananPesanan);
+//            stockChange.put("quantity", (-1)*jumlahMakananPesanan);
 //            fs.collection("Stock").add(stockChange);
 
 //            stockCount.setStockChange((-1)*jumlahMakananPesanan);
